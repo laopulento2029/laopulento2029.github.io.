@@ -1,18 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
         <style>
-            html {scroll-behavior: smooth;}
+            html {
+                scroll-behavior: smooth;
+                font-size: 20px;
+                font-family: 
+            }
             body {
                 background-image: url('taylor_swift_reputation_bg.png');
+                background-size: calc(100%);
+                background-repeat: no-repeat;   
+            }
+            .headerbg {
+                margin-top: 2vh;
+                position: relative;
+                top: 0;
+                left: -4vh;
+                width: calc(103% + 8.5px);
+                height: 10vh;
+                background-color: rgba(0, 0, 0, 0.225);
+                z-index: 0;
+            }
+            .header {
+                width: 45vh;
+                height: 20vh;
+                background-image: url('black_torn_paper.png');
                 background-size: cover;
                 background-repeat: no-repeat;
+                background-position: center;
+                position: relative;
+                bottom: 15vh;
+                margin: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1;
+            }
+            .titletext {
+                color: #f2f2f2;
+		        font-size: 2.2em;
+                font-family: 'Cormorant Garamond', sans-serif;
+                font-weight: bolder;
+                text-shadow: 0px 0px 8px rgba(255, 192, 203, 0.8), 0 0 16px rgba(138, 43, 226, 0.6);
+                background: linear-gradient(90deg, #a8a6a6, #a64bf4, #ff69b4);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-size: 300%;
+                animation: shimmer 3s linear infinite;
+                animation: fadeIn 2s ease-in-out;
+            }
+            @keyframes shimmer {
+                0% {background-position: 0% 50%;}
+                100% {background-position: 100% 50%;}
+            }
+            @keyframes fadeIn {
+                from {opacity: 0; tranform: translateY(-10px);}
+                to {opacity: 1; transform: translateY(0);}
+            }
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+                display: none;
+                animation: fadeIn 0.5s ease;
+            }
+            .barcontainer {
+                display: inline-block;
+                cursor: pointer;
+                position: absolute;
+                top: 3.7vh;
+                left: 1vh;
+                z-index: 1001;
+                margin: 20px;
+                transition: margin-left 0.5s;
+            }
+            .bar1, .bar2, .bar3 {
+                width: 35px;
+                height: 5px;
+                background-color: #333;
+                margin: 6px 0;
+                transition: 0.4s;
+            }
+            .barcontainer:hover .bar1,
+            .barcontainer:hover .bar2,
+            .barcontainer:hover .bar3 {
+                background-color: #f1f1f1;
+            }
+            .barcontainer.change .bar1 {transform: translate(0, 11px) rotate(-45deg);}
+            .barcontainer.change .bar2 {opacity: 0;}
+            .barcontainer.change .bar3 {transform: translate(0, -11px) rotate(45deg);}
+            .sidebar {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 5;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+            }
+            .sidebar a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 1.3em;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+            .sidebar a:hover {color: #f1f1f1;}
+            #main {
+                position: relative;
+                transition: margin-left 0.5s;
+                padding: 16px;
+            }
+            @media screen and (max-height: 450px) {
+                .sidebar {padding-top: 15px;}
+                .sidebar a {font-size: 1em;}
+            }
+            @media screen and (min-height: 1081px) {
+                .sidebar {padding-top: 15px;}
+                .sidebar a {font-size: 1.3em;}
             }
         </style>
         <title>Magazine: Swiftieverse</title>
     </head>
     <body>
-
+        <div id="sidebarID" class="sidebar">
+            <a href="#">About</a>
+            <a href="#">Albums</a>
+            <a href="#">Awards</a>
+            <a href="#">Tours</a>
+            <a href="#">Merch</a>
+        </div>
+        <div id="overlay"></div>
+        <div id="main">
+            <div class="barcontainer" onclick="toggleNav(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div class="headerbg"></div>
+            <div class="header">
+                <p class="titletext">Swiftieverse</p>;  
+            </div>
+        </div>
+        <script>
+            function toggleNav(x) {
+                x.classList.toggle("change");
+                let sidebar = document.getElementById("sidebarID");
+                let main = document.getElementById("main");
+                let overlay = document.getElementById("overlay");
+                if (sidebar.style.width === "250px") {
+                    sidebar.style.width = "0";
+                    main.style.marginLeft = "0";
+                    overlay.style.display = "none";
+                }
+                else {
+                    sidebar.style.width = "250px";
+                    main.style.marginLeft = "250px";
+                    overlay.style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>
