@@ -8,19 +8,20 @@
             html {
                 scroll-behavior: smooth;
                 font-size: 20px;
-                font-family: 
+                font-family: 'Montserrat'; 
             }
             body {
                 background-image: url('taylor_swift_reputation_bg.png');
-                background-size: calc(100%);
-                background-repeat: no-repeat;   
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed; 
             }
             .headerbg {
                 margin-top: 2vh;
                 position: relative;
                 top: 0;
                 left: -4vh;
-                width: calc(103% + 3px);
+                width: calc(103% + 8px);
                 height: 10vh;
                 background-color: rgba(0, 0, 0, 0.225);
                 z-index: 0;
@@ -125,6 +126,66 @@
                 transition: margin-left 0.5s;
                 padding: 16px;
             }
+            .gridcontainer {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 20px;
+                padding: 40px;
+                height: 50vh;
+                align-content: center;
+                justify-content: center;
+            }
+            .topcards {
+                position: relative;
+                bottom: 10vh;
+                height: 30vh;
+                background-color: rgb(217, 174, 208);
+                border-radius: 15%;
+                overflow: hidden;
+                box-shadow: 0 8px 24px rgba(222, 141, 231, 0.4);
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, outline 0.1s ease-in-out;
+            }
+            .botcards {
+                position: relative;
+                bottom: 10vh;
+                height: 30vh;
+                background-color: rgb(217, 174, 208);
+                border-radius: 15%;
+                overflow: hidden;
+                box-shadow: 0 8px 24px rgba(222, 141, 231, 0.4);
+                left: 50%;
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, outline 0.1s ease-in-out;
+            }
+            .topcards:hover,
+            .botcards:hover {
+                transform: scale(1.2);
+                box-shadow: 0 0 20px rgba(255, 105, 180, 0.7), 0 0 40px rgba(135, 43, 226, 0.6);
+                outline: 3px solid white;
+                z-index: 2;
+            }
+            .topcards img,
+            .botcards img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .textoverlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.5);
+                color: #f1f1f1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+                font-size: 1.8em;
+                font-weight: bold;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
             @media screen and (max-height: 450px) {
                 .sidebar {padding-top: 15px;}
                 .sidebar a {font-size: 1em;}
@@ -155,6 +216,13 @@
             <div class="header">
                 <p class="titletext">Swiftieverse</p>;  
             </div>
+            <div class="gridcontainer">
+                <a href="about.html" class="topcards"></a>
+                <a href="albums.html" class="topcards"></a>
+                <a href="awards.html" class="topcards"></a>
+                <a href="tours.html" class="botcards"></a>
+                <a href="merch.html" class="botcards"></a>
+            </div>
         </div>
         <script>
             function toggleNav(x) {
@@ -175,6 +243,4 @@
             }
         </script>
     </body>
-
 </html>
-
