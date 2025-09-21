@@ -206,34 +206,31 @@
             }
             .cardcontent {
                 position: absolute;
-                left: 20%;
+                box-sizing: border-box;
+                z-index: -1;
+            }
+            .cardcontent p {
                 color: #1e1919;
                 font-size: 0.4em;
                 font-family: 'Roboto Slab', serif;
                 font-weight: normal;
                 text-align: center;
                 justify-content: center;
-                display: flex;
                 padding: 10px;
                 letter-spacing: 1px;
                 line-height: 1.5;
-                box-sizing: border-box;
                 opacity: 0;
                 transition: opacity 0.3s ease-in-out;
                 text-transform: none;
             }
             .cardcontent img {
                 position: absolute;
-                z-index: 0;
-                align-content: left;
-                width: 30vh;
-                height: 100%;
+                background-position-y: center;
             }
-            .cardoverlay:hover .cardcontent,
-            .cardoverlay:hover .cardcontent img {opacity: 1;}
+            .cardoverlay:hover .cardcontent {opacity: 1;}
             @media screen and (min-height: 1081px) {
                 .sidebar {padding-top: 20px;}
-                .sidebar a {font-size: 1.5em;}
+                .sidebar a {font-size: 2em;}
             }
         </style>
         <title>Magazine: Swiftieverse</title>
@@ -263,7 +260,7 @@
                         <h3>About</h3>
                         <img src="https://i0.wp.com/www.thewrap.com/wp-content/uploads/2023/10/Taylor-Swift-Eras-Tour-Doc.jpg?w=1200&quality=89&ssl=1" alt="Taylor Swift">
                         <div class="cardcontent">
-                            <img src="https://i.pinimg.com/1200x/22/17/58/2217581e26ff09b72f7bde57faaf32c2.jpg" alt="Taylor Swift Silly">
+                            <img src="https://i.pinimg.com/1200x/22/17/58/2217581e26ff09b72f7bde57faaf32c2.jpg" alt="Taylor Swift Silly" style="left: -35%; width: 30vh; height: 100%;">
                             <p>This is <strong>Taylor Swift</strong>, the global icon who turned her personal stories into timeless anthems from <strong>small-town country beginnings to worldwide pop sensations</strong>, her journey inspires millions. Click here to dive into the life of the legend herself.</p>
                         </div>
                         <p></p>
