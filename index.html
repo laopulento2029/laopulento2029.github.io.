@@ -4,6 +4,7 @@
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
         <style>
             html {
                 scroll-behavior: smooth;
@@ -128,14 +129,15 @@
             }
             .gridcontainer {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(6, 1fr);
                 grid-gap: 20px;
                 padding: 40px;
                 height: 50vh;
                 align-content: center;
                 justify-content: center;
             }
-            .topcards {
+            .maincards {
+                grid-column: span 2;
                 position: relative;
                 bottom: 10vh;
                 height: 30vh;
@@ -143,49 +145,92 @@
                 border-radius: 15%;
                 overflow: hidden;
                 box-shadow: 0 8px 24px rgba(222, 141, 231, 0.4);
+                outline: 2px solid rgb(93, 50, 18);
+                justify-items: center;
+                text-decoration: none;
                 transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, outline 0.1s ease-in-out;
             }
-            .botcards {
+            .sidecards {
                 position: relative;
                 bottom: 10vh;
                 height: 30vh;
-                background-color: rgb(217, 174, 208);
                 border-radius: 15%;
                 overflow: hidden;
-                box-shadow: 0 8px 24px rgba(222, 141, 231, 0.4);
-                left: 50%;
-                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, outline 0.1s ease-in-out;
+                outline: 2px solid rgb(93, 50, 18); 
             }
-            .topcards:hover,
-            .botcards:hover {
-                transform: scale(1.2);
+            .maincards:hover {
+                transform: scale(1.05);
                 box-shadow: 0 0 20px rgba(255, 105, 180, 0.7), 0 0 40px rgba(135, 43, 226, 0.6);
                 outline: 3px solid white;
                 z-index: 2;
+                text-decoration: none;
             }
-            .topcards img,
-            .botcards img {
-                width: 100%;
-                height: 100%;
+            .maincards img {
+                position: relative;
+                z-index: 0;
+                width: 105%;
+                height: auto;
+                border-radius: 15%;
                 object-fit: cover;
+                object-position: center;
+                display: block;
+                opacity: 0.5;
             }
-            .textoverlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: rgba(0, 0, 0, 0.5);
+            .cardoverlay {
+                position: relative;
+                background-color: rgba(149, 90, 136, 0.3);
                 color: #f1f1f1;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
+                height: 90%;
                 text-align: center;
                 padding: 10px 0;
                 font-size: 1.8em;
                 font-weight: bold;
-                letter-spacing: 2px;
+                letter-spacing: 3px;
                 text-transform: uppercase;
             }
+            .cardoverlay h3 {
+                position: absolute;
+                text-align: center;
+                font-size: 1.5em;
+                z-index: 1;
+                text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.7);
+            }
+            .maincards:hover .cardoverlay h3,
+            .maincards:hover img {
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+            .cardcontent {
+                position: absolute;
+                left: 20%;
+                color: #1e1919;
+                font-size: 0.4em;
+                font-family: 'Roboto Slab', serif;
+                font-weight: normal;
+                text-align: center;
+                justify-content: center;
+                display: flex;
+                padding: 10px;
+                letter-spacing: 1px;
+                line-height: 1.5;
+                box-sizing: border-box;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                text-transform: none;
+            }
+            .cardcontent img {
+                position: absolute;
+                z-index: 0;
+                align-content: left;
+                width: 30vh;
+                height: 100%;
+            }
+            .cardoverlay:hover .cardcontent,
+            .cardoverlay:hover .cardcontent img {opacity: 1;}
             @media screen and (min-height: 1081px) {
                 .sidebar {padding-top: 20px;}
                 .sidebar a {font-size: 1.5em;}
@@ -213,11 +258,47 @@
                 <p class="titletext">Swiftieverse</p>;  
             </div>
             <div class="gridcontainer">
-                <a href="about.html" class="topcards"></a>
-                <a href="albums.html" class="topcards"></a>
-                <a href="awards.html" class="topcards"></a>
-                <a href="tours.html" class="botcards"></a>
-                <a href="merch.html" class="botcards"></a>
+                <a href="about.html" class="maincards">
+                    <div class="cardoverlay">
+                        <h3>About</h3>
+                        <img src="https://i0.wp.com/www.thewrap.com/wp-content/uploads/2023/10/Taylor-Swift-Eras-Tour-Doc.jpg?w=1200&quality=89&ssl=1" alt="Taylor Swift">
+                        <div class="cardcontent">
+                            <img src="https://i.pinimg.com/1200x/22/17/58/2217581e26ff09b72f7bde57faaf32c2.jpg" alt="Taylor Swift Silly">
+                            <p>This is <strong>Taylor Swift</strong>, the global icon who turned her personal stories into timeless anthems from <strong>small-town country beginnings to worldwide pop sensations</strong>, her journey inspires millions. Click here to dive into the life of the legend herself.</p>
+                        </div>
+                        <p></p>
+                    </div>
+                </a>
+                <a href="albums.html" class="maincards">
+                    <div class="cardoverlay">
+                        <h3>Albums</h3>
+                        <p></p>
+                    </div>
+                </a>
+                <a href="awards.html" class="maincards">
+                    <div class="cardoverlay">
+                        <h3>Awards</h3>
+                        <p></p>
+                    </div>
+                </a>
+                <div class="sidecards">
+                    <p></p>
+                </div>
+                <a href="tours.html" class="maincards">
+                    <div class="cardoverlay">
+                        <h3>Tours</h3>
+                        <p></p>
+                    </div>
+                </a>
+                <a href="merch.html" class="maincards">
+                    <div class="cardoverlay">
+                        <h3>Merch</h3>
+                        <p></p>
+                    </div>
+                </a>
+                <div class="sidecards">
+                    <p></p>
+                </div>
             </div>
         </div>
         <script>
