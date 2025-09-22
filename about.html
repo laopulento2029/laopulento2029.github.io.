@@ -179,22 +179,25 @@
 
             </div>
             <script>
-            function toggleNav(x) {
-                x.classList.toggle("change");
-                let sidebar = document.getElementById("sidebarID");
-                let main = document.getElementById("main");
-                let overlay = document.getElementById("overlay");
-                if (sidebar.style.width === "250px") {
-                    sidebar.style.width = "0";
-                    main.style.marginLeft = "0";
+                document.addEventListener("DOMContentLoaded", function() {
+                document.body.classList.add("fade-in");
+                });
+                function toggleNav(x) {
+                    x.classList.toggle("change");
+                     let sidebar = document.getElementById("sidebarID");
+                    let main = document.getElementById("main");
+                    let overlay = document.getElementById("overlay");
+                    if (sidebar.style.width === "250px") {
+                        sidebar.style.width = "0";
+                        main.style.marginLeft = "0";
                     overlay.style.display = "none";
-                }
-                else {
-                    sidebar.style.width = "250px";
-                    main.style.marginLeft = "250px";
-                    overlay.style.display = "block";
-                }
-            }
+                    }
+                    else {
+                        sidebar.style.width = "250px";
+                        main.style.marginLeft = "250px";
+                        overlay.style.display = "block";
+                    }
+                }   
         </script>
     </body>
 </html>

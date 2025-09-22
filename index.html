@@ -337,6 +337,9 @@
             </div>
         </div>
         <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.body.classList.add("fade-in");
+            });
             function toggleNav(x) {
                 x.classList.toggle("change");
                 let sidebar = document.getElementById("sidebarID");
