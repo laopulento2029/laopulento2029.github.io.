@@ -168,6 +168,11 @@
                 margin-left: 7rem;
                 text-justify: inter-word;
             }
+            #BlankSpaceP {
+                cursor: pointer;
+                display: block;
+                background: rgba(255, 192, 203, 0.2);
+            }
             .imagegrid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -252,12 +257,8 @@
                     <div class="textbox">
                         <p><em>Swiftieverse is a digital magazine created by Liam Casey A. Opulento.</em></p>
                         <p><strong>Hi, I'm Liam </strong>👋 A proud Swiftie who made this space to share my love for Taylor. Her music has been my comfort, hype, and diary all in one. Whether you analyze her lyrics at 2 AM, ranking albums with your friends, or rewatching The Eras Tour clips on loop, you will always be welcome here to stan harder for Swift. At the end of the day, I'm just another fan who believes in the magic of storytelling and poetry, and Taylor happens to be the greatest one of our time!</p>
-                        <p>The first Taylor song I ever heard: <strong>"Blank Space"</strong> from the album <em>1989</em>. <br>
-                            <audio controls>
-                                <source src="Blank_Space.mp3" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </p>
+                        <p id="BlankSpaceP">The first Taylor song I ever heard: <strong>"Blank Space"</strong> from the album <em>1989</em>. (Hover on this line)</p>
+                        <audio id="BlankSpaceAudio" src="blankspace.mp3" preload="auto"></audio>
                     </div>
                     <h2>Let's give it up for Taylor Swift !!!</h2>
                     <div class="imagegrid">
@@ -284,26 +285,52 @@
                         <img src="https://i.cbc.ca/1.7613015.1755634555!/fileImage/httpImage/image.jpg_gen/derivatives/original_1180/taylor-swift-sourdough.jpg?im=Resize%3D1104" alt="Baking with Travis" style="top: 18.5rem; right: -4rem; width: 25%;">
                     </div>
             </div>
-            <script>
-                window.addEventListener("load", () => {
-                    document.body.classList.add("loaded");
-                });
-                function toggleNav(x) {
-                    x.classList.toggle("change");
-                     let sidebar = document.getElementById("sidebarID");
-                    let main = document.getElementById("main");
-                    let overlay = document.getElementById("overlay");
-                    if (sidebar.style.width === "250px") {
-                        sidebar.style.width = "0";
-                        main.style.marginLeft = "0";
+        </div>
+        <script>
+            window.addEventListener("load", () => {
+                document.body.classList.add("loaded");
+            });
+            function toggleNav(x) {
+                x.classList.toggle("change");
+                 let sidebar = document.getElementById("sidebarID");
+                let main = document.getElementById("main");
+                let overlay = document.getElementById("overlay");
+                if (sidebar.style.width === "250px") {
+                    sidebar.style.width = "0";
+                    main.style.marginLeft = "0";
                     overlay.style.display = "none";
-                    }
+                }
+                else {
+                    sidebar.style.width = "250px";
+                    main.style.marginLeft = "250px";
+                    overlay.style.display = "block";
+                }
+            }
+            function fadeIn(audio) {
+                audio.volume = 0;
+                audio.currentTime = 0;
+                audio.play();
+                let fade = setInterval(() => {
+                    if (audio.volume < 1) {audio.volume = Math.min(audio.volume + 0.05, 1);} 
+                    else {clearInterval(fade);}
+                }, 50);
+            }
+
+            function fadeOut(audio) {
+                let fade = setInterval(() => {
+                    if (audio.volume > 0.05) {audio.volume = Math.max(audio.volume - 0.05, 0);} 
                     else {
-                        sidebar.style.width = "250px";
-                        main.style.marginLeft = "250px";
-                        overlay.style.display = "block";
+                        audio.pause();
+                        audio.currentTime = 0;
+                        clearInterval(fade);
                     }
-                }   
+                }, 50);
+            }
+
+            const card1 = document.getElementById("BlankSpaceP");
+            const sound1 = document.getElementById("BlankSpaceAudio");
+            card1.addEventListener("mouseenter", () => fadeIn(sound1));
+            card1.addEventListener("mouseleave", () => fadeOut(sound1));
         </script>
     </body>
 </html>
