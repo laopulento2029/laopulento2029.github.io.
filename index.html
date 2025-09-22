@@ -19,7 +19,7 @@
                 opacity: 0;
                 transition: opacity 0.5s ease-in-out;
             }
-            body-fade-in {
+            body.loaded {
                 opacity: 1;
             }
             .headerbg {
@@ -337,8 +337,8 @@
             </div>
         </div>
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.body.classList.add("fade-in");
+            window.addEventListener("load", () => {
+                document.body.classList.add("loaded");
             });
             function toggleNav(x) {
                 x.classList.toggle("change");
