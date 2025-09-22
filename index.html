@@ -151,11 +151,14 @@
                 transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, outline 0.1s ease-in-out;
             }
             .sidecards {
+                grid-column: span 1;
                 position: relative;
-                bottom: 10vh;
                 height: 30vh;
+                bottom: 32%;
                 border-radius: 15%;
                 overflow: hidden;
+                background-size: cover; 
+                outline: 2px solid rgb(93, 50, 18);
             }
             .maincards:hover {
                 transform: scale(1.05);
@@ -255,11 +258,11 @@
     </head>
     <body>
         <div id="sidebarID" class="sidebar">
-            <a href="#">About</a>
-            <a href="#">Albums</a>
-            <a href="#">Awards</a>
-            <a href="#">Tours</a>
-            <a href="#">Merch</a>
+            <a href="about.html">About</a>
+            <a href="albums.html">Albums</a>
+            <a href="awards.html">Awards</a>
+            <a href="tours.html">Tours</a>
+            <a href="merch.html">Merch</a>
         </div>
         <div id="overlay"></div>
         <div id="main">
@@ -281,7 +284,6 @@
                             <img src="https://i.pinimg.com/1200x/22/17/58/2217581e26ff09b72f7bde57faaf32c2.jpg" alt="Taylor Swift Silly">
                             <p>This is <strong>Taylor Swift</strong>, the global icon who turned her personal stories into timeless anthems from <strong>small-town country beginnings to worldwide pop sensations</strong>, her journey inspires millions. Click here to dive into the life of the legend herself.</p>
                         </div>
-                        <p></p>
                     </div>
                 </a>
                 <a href="albums.html" class="maincards">
@@ -292,7 +294,6 @@
                             <img src="vinyls.png" alt="Discography">
                             <p>Each Taylor Swift album is like a <strong>diary in music form</strong>, capturing different eras of her life. From <strong>country roots to pop domination to indie-folk vibes,</strong> every track tells a story. Click here to explore her discography, era by era.</p>
                         </div>
-                        <p></p>
                     </div>
                 </a>
                 <a href="awards.html" class="maincards">
@@ -303,12 +304,9 @@
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhHCEHuofygDfoBxWm_nEiyqs_qifrEGCr8A&s" alt="Taylor Swift More Awards">
                             <p style="width: 50%">Taylor isn't just beloved by fans, she's <strong>one of the most awarded artists</strong> of all time! From <strong>Grammys to the AMAs,</strong> her shelf speaks for itself. Click here to see how she redefined success in music.</p>
                         </div>
-                        <p></p>
                     </div>
                 </a>
-                <div class="sidecards">
-                    <p></p>
-                </div>
+                <div class="sidecards" style="background-image: url('collage.jpg');"></div>
                 <a href="tours.html" class="maincards">
                     <div class="cardoverlay">
                         <h3>Tours</h3>
@@ -317,7 +315,6 @@
                             <img src="https://i.pinimg.com/736x/ee/e1/c6/eee1c60742a92e4621b276491937da57.jpg" alt="Eras Tour">
                             <p>Her tours aren't just concerts, they're <strong>cultural events</strong>. With dazzling visuals, epic setlists, and unforgettable moments, <strong>Swifties call them "eras" </strong>for a reason. Click here to relive the magic of her tours.</p>
                         </div>
-                        <p></p>
                     </div>
                 </a>
                 <a href="merch.html" class="maincards">
@@ -331,9 +328,7 @@
                         <p></p>
                     </div>
                 </a>
-                <div class="sidecards">
-                    <p></p>
-                </div>
+                <div class="sidecards" style="background-image: url('collage2.jpg');"></div>
             </div>
         </div>
         <script>
