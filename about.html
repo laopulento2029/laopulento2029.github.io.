@@ -140,8 +140,8 @@
                 margin-bottom: -25vh;
                 width: 45%;
                 background-image: url('https://i.pinimg.com/1200x/b1/cc/3f/b1cc3f7abf857abb47181f22c187f457.jpg');
-                background-size: cover;
-                background-repeat: repeat;
+                background-size: 100%;
+                background-repeat: repeat-y;
                 background-color: rgba(255, 255, 255, 0.85);
                 border-radius: 10px;
                 padding: 2rem;
@@ -313,7 +313,7 @@
                 let fade = setInterval(() => {
                     if (audio.volume < 1) {audio.volume = Math.min(audio.volume + 0.05, 1);} 
                     else {clearInterval(fade);}
-                }, 50);
+                }, 100);
             }
 
             function fadeOut(audio) {
@@ -324,11 +324,12 @@
                         audio.currentTime = 0;
                         clearInterval(fade);
                     }
-                }, 50);
+                }, 100);
             }
 
             const card1 = document.getElementById("BlankSpaceP");
             const sound1 = document.getElementById("BlankSpaceAudio");
+
             card1.addEventListener("mouseenter", () => fadeIn(sound1));
             card1.addEventListener("mouseleave", () => fadeOut(sound1));
         </script>
