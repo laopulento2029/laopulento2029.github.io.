@@ -141,16 +141,17 @@
                 width: 45%;
                 background-image: url('https://i.pinimg.com/1200x/b1/cc/3f/b1cc3f7abf857abb47181f22c187f457.jpg');
                 background-size: cover;
+                background-repeat: repeat;
                 background-color: rgba(255, 255, 255, 0.85);
                 border-radius: 10px;
                 padding: 2rem;
-                min-height: 73.5vh;
+                height: auto;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
             .contentboxP1 {position: relative;}
-            .contentboxP1 h2 {
+            .contentbox h2 {
                 color: #f2f2f2;
-		        font-size: 1.5em;
+		        font-size: 2em;
                 font-weight: bolder;
                 text-shadow: 0px 0px 8px rgba(208, 52, 78, 0.8), 0 0 16px rgba(138, 43, 226, 0.6);
                 background: linear-gradient(90deg, #a8a6a6, #a64bf4, #ff69b4);
@@ -164,7 +165,7 @@
                 font-size: 1.1em;
                 color: #333;
                 text-align: right;
-                margin-left: 6rem;
+                margin-left: 7rem;
                 text-justify: inter-word;
             }
             .imagegrid {
@@ -188,11 +189,29 @@
                 box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
                 background-size: cover;
                 background-position: center;
+                margin-bottom: 1rem;
             }
             .polaroid img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+            }
+            .textbox {
+                position: relative;
+                width: 70%;
+                text-align: center;
+                justify-content: center;
+                margin: 0 auto;
+                color: #333;
+                padding: 1.5rem;
+                border-radius: 30px;
+                background: linear-gradient(90deg, #a8a6a693, #a54bf488, #ff69b486);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+            .textbox img {
+                position: absolute;
+                justify-self: right;
+                width: 15%;
             }
             @media screen and (min-width: 1920px) {
                 .sidebar {padding-top: 20px;}
@@ -209,6 +228,7 @@
             <a href="awards.html">Awards</a>
             <a href="tours.html">Tours</a>
             <a href="merch.html">Merch</a>
+            <a href="references.html">References</a>
         </div>
         <div id="overlay"></div>
         <div id="main">
@@ -218,22 +238,44 @@
                 <div class="bar3"></div>
             </div>
             <div class="headerbg"></div>
-            <div class="header">
+            <div class="header" id="top">
                 <p class="titletext">Swiftieverse:<br>About</p> 
             </div>
 
             <div class="contentbox">
                 <div class="contentboxP1">
-                    <h2>About Swiftieverse</h2>
-                    <p>Welcome to Swiftieverse, a safe space where lyrics live, eras breathe, and Taylor's story becomes part of ours.</p>
-                    <p>At Swiftieverse, we celebrate Swift's artistry because we're not just fans, we're part of a universe—Swifties!</p>
+                    <h2>About Swiftieverse and Author</h2>
+                    <p><strong>Welcome to Swiftieverse</strong>, a safe space where lyrics live, eras breathe, and Taylor's story becomes part of ours.</p>
+                    <p>At Swiftieverse, we celebrate Swift's artistry because<strong> we're not just fans, we're part of a universe—Swifties</strong>!</p>
+                </div>
+                    <div class="textbox">
+                        <p style="font-style: italic;">Swiftieverse is a digital magazine created by Liam Casey A. Opulento.</p>
+                        <p><strong>Hi, I'm Liam </strong>👋 A proud Swiftie who made this space to share my love for Taylor. Her music has been my comfort, hype, and diary all in one. Whether you analyze her lyrics at 2 AM, ranking albums with your friends, or rewatching The Eras Tour clips on loop, you will always be welcome here to stan harder for Swift. At the end of the day, I'm just another fan who believes in the magic of storytelling and poetry, and Taylor happens to be the greatest one of our time!</p>
+                    </div>
                     <h2>Let's give it up for Taylor Swift !!!</h2>
                     <div class="imagegrid">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png" alt="Polaroid 1" class="polaroid">
                         <img src="https://cdn.britannica.com/53/264753-050-74DEFF87/Taylor-Swift-accepts-the-Album-Of-The-Year-award-for-Midnights-onstage-during-the-66th-GRAMMY-Awards-at-Cryptocom-Arena-on-February-04-2024.jpg" alt="Polaroid 2" class="polaroid">
                         <img src="https://time.com/ayit/images/6342806/cover.png" alt="Polaroid 3" class="polaroid">
                     </div>
-                </div>
+                    <div class="textbox">
+                        <p><strong>Oh hi! My name is Taylor, and I was born in 1989!</strong></p>
+                        <p>I'm a songwriter, performer, and storyteller who's been living life through different eras—from my debut to my hot photoshoot for my upcoming album, The Life of a Showgirl.</p>
+                        <p>At heart, I just write about my feelings, and somehow, they became songs that belong to all of us.</p>
+                    </div>
+                    <h2>Fun Facts!</h2>
+                    <div class="textbox" style="text-align: left;">
+                        <p>I wrote my first song at the age of 12, and it was called "Lucky You."</p>
+                        <img src="https://lastfm.freetls.fastly.net/i/u/500x500/28acff705ed60da3db988c4664947ce5.jpg" alt="Lucky You" style="top: 0; right: -2.5rem;">
+                        <p>I have 3 cats: Meredith, Olivia, and Benjamin Button.</p>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiJsuvdc_1e-3eUxqauDXMOyrDgdDNEB2LBQ&s" alt="Cats" style="top: 4.5rem; right: -5rem; width: 30%;">
+                        <p>I direct all of my own music videos like the All Too Well: The Short Film</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/69/All_Too_Well_short_film_poster.jpg" alt="All Too Well Film" style="top: 9rem; right: -2rem; width: 12%;">
+                        <p>My favorite number is 13. This will be useful in finding easter eggs. <strong>*numerology~~*</strong></p>
+                        <img src="https://swiftlysungstories.com/wp-content/uploads/2024/11/taylor-swift-theories-and-easter-eggs-cover-image-swiftly-sung-stories-1024x683.jpg" alt="Easter Eggs" style="top: 13.5em; right: -4.5rem; width: 22%;">
+                        <p>I love baking (and Travis Kelce 💖) *Loafing him was bread~~~*</p>
+                        <img src="https://i.cbc.ca/1.7613015.1755634555!/fileImage/httpImage/image.jpg_gen/derivatives/original_1180/taylor-swift-sourdough.jpg?im=Resize%3D1104" alt="Baking with Travis" style="top: 18.5rem; right: -4rem; width: 25%;">
+                    </div>
             </div>
             <script>
                 window.addEventListener("load", () => {
