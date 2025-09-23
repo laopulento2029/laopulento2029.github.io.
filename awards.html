@@ -139,14 +139,126 @@
                 bottom: 20vh;
                 margin: auto;
                 margin-bottom: -25vh;
-                width: 100%;
-                background-color: rgba(69, 44, 44, 0.5);
-                border-radius: 10px;
+                width: 45%;
+                min-height: 80vh;
+                background-image: url('red-carpet.png');
+                background-repeat: repeat-y;
+                background-size: contain;
+                border-radius: 30px;
                 padding: 1rem;
-                max-height: auto;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
-            @media screen and (min-height: 1081px) {
+            .textbox {
+                position: relative;
+                width: 60%;
+                text-align: center;
+                justify-content: center;
+                margin: 0 auto;
+                color: rgb(238, 226, 226);
+                padding: 0.5rem;
+                border-radius: 30px;
+                background-image: url('https://thumb.ac-illust.com/4d/4d56a8081ee7c6ddf630b7449a26b7ed_t.jpeg');
+                background-size: cover;
+                box-shadow: 0 4px 20px 0 6px 20px 0 rgba(255, 255, 255, 0.45);
+                font-size: 0.9em;
+                margin-top: -1em;
+                line-height: 1.4em;
+            }
+            .textbox2 {
+                position: relative;
+                width: 80%;
+                text-align: center;
+                justify-content: center;
+                margin: 0 auto;
+                color: rgb(233, 223, 223);
+                padding: 0.5rem;
+                border-radius: 30px;
+                background: linear-gradient(90deg, #f4b64b88, #ff696986, #f4b64b88);
+                box-shadow: 0 4px 20px 0 6px 20px 0 rgba(255, 255, 255, 0.45);
+                font-size: 0.9em;
+                line-height: 1.4em;
+                top: 1em; 
+                margin-bottom: 5em;
+            }
+            .contentbox h2 {
+                color: #f2f2f2;
+		        font-size: 2em;
+                font-weight: bolder;
+                text-shadow: 0px 0px 8px rgba(208, 52, 78, 0.8), 0 0 16px rgba(138, 43, 226, 0.6);
+                background: linear-gradient(90deg, #ffffff, #ca8dff, #fb9ccc);
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-size: 300%;
+                text-align: center;
+            }
+            .masonry {
+                column-count: 3;
+                column-gap: 15px;
+                width: 95%;
+                height: 95%;
+            }
+            .card {
+                position: relative;
+                margin-bottom: 15px;
+                border-radius: 25px;
+                break-inside: avoid;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+            .card img {
+                width: 100%;
+                display: block;
+                transition: transform 0.3s ease;
+            }
+            .card:hover img {transform: scale(1.05);}
+            .overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                top: 0;
+                background-color: rgba(0,0,0,0.7);
+                color: #fff;
+                padding: 10px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .card:hover .overlay {opacity: 1;}
+            .overlay h2 {
+                margin: 0 0 5px 0;
+                font-size: 0.9rem;
+            }
+            .overlay p {
+                margin: 0;
+                font-size: 0.7rem;
+            }
+            .embed {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #backToTopBtn {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                z-index: 99;
+                font-size: 18px;
+                border: none;
+                outline: none;
+                background-color: #111;
+                color: white;
+                cursor: pointer;
+                padding: 12px 16px;
+                border-radius: 50%;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                transition: opacity 0.3s ease, transform 0.2s ease;
+                opacity: 1;
+                text-decoration: none;
+            }
+            #backToTopBtn:hover {
+                background-color: #444;
+                transform: scale(1.1);
+            }
+            @media screen and (min-height: 1920px) {
                 .sidebar {padding-top: 20px;}
                 .sidebar a {font-size: 2em;}
                 .titletext {font-size: 2.5em;}
@@ -170,14 +282,104 @@
                 <div class="bar3"></div>
             </div>
             <div class="headerbg"></div>
-            <div class="header">
+            <div id="top" class="header">
                 <p class="titletext">Swiftieverse:<br>Awards</p> 
             </div>
 
             <div class="contentbox">
-
+                <h2>The Red Carpet !</h2>
+                <div class="textbox">
+                    <p>Taylor Swift has amassed over 700 awards and more than 1,600 nominations, solidifying her status as one of the most decorated artists in music history. Her accolades span across various prestigious platforms, including the Grammy Awards, American Music Awards, Billboard Music Awards, MTV Video Music Awards, and iHeartRadio Music Awards. Notably, she holds the record for the most wins in several of these categories, underscoring her enduring influence and exceptional talent in the music industry.</p>
+                </div>
+                <h2>Notable Awards</h2>
+                <div class="masonry">
+                    <div class="card">
+                        <img src="https://i.pinimg.com/736x/39/9b/86/399b86a6b475e78fd91c7e6aee36be88.jpg" alt="Grammy Award for Album of the Year (Fearless)">
+                        <div class="overlay">
+                            <h2 style="position: relative; top: 40%;">Grammy Award for Album of the Year</h2>
+                            <p style="position: relative; top: 40%;">52nd Grammys: Fearless – Marked Taylor’s first AOTY win</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://i8.amplience.net/i/naras/gettyimages-511612672.jpg.jpg" alt="Grammy Award for Album of the Year (1989)">
+                        <div class="overlay">
+                            <h2>Grammy Award for Album of the Year</h2>
+                            <p>58th Grammys: 1989 – Made Taylor the 1st woman to win AOTY 2x for her solo recordings </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://www.nme.com/wp-content/uploads/2021/03/taylor-swift-grammys-2021-1.jpg" alt="Grammy Award for Album of the Year (Folklore)">
+                        <div class="overlay">
+                            <h2>Grammy Award for Album of the Year</h2>
+                            <p>63rd Grammys: Folklore – In 2021, her 3rd AOTY</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://preview.redd.it/snark-swiftmas-day-something-taylor-grabs-grammys-among-v0-ls5fni4tl88e1.jpg?width=582&format=pjpg&auto=webp&s=cfcd0d014343cd3e8cf2fcb7fcfbbcb1b938ad9b" alt="Grammy Award for Album of the Year (Midnights)">
+                        <div class="overlay">
+                            <h2>Grammy Award for Album of the Year</h2>
+                            <p>66th Grammys: Midnights – In 2024, made Taylor the 1st artist to get 4 AOTYs</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkXhsJRqpfUvv9QrfFn1YfIGeHZxVZTMCUfQ&s" alt="American Music Award for Artist of the Decade">
+                        <div class="overlay">
+                            <h2 style="font-size: 0.75em;">American Music Award for Artist of the Decade</h2>
+                            <p style="font-size: 0.6em;">In 2019, Taylor's decade-long impact on music was recognized.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://hips.hearstapps.com/hmg-prod/images/taylor-swift-accepts-the-woman-of-the-decade-award-onstage-news-photo-1576230868.jpg" alt="Billboard Woman of the Decade Award">
+                        <div class="overlay">
+                            <h2 style="position: relative; top: 30%;">Billboard Woman of the Decade Award</h2>
+                            <p style="position: relative; top: 30%;">In 2019, Taylor's influence on the music industry over the decade was honored.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://media1.popsugar-assets.com/files/thumbor/OehhDYZwzSYFFPgwDmPDIh_IusU=/fit-in/792x1156/filters:format_auto():upscale()/2017/08/24/818/n/1922398/16b2cc5116014c40_GettyImages-90713034.jpg" alt="MTV Video Music Award for Video of the Year">
+                        <div class="overlay">
+                            <h2 style="position: relative; top: 40%;">MTV Video Music Award for Video of the Year</h2>
+                            <p style="position: relative; top: 40%;">2009: You Belong With Me – Marked her first VMA win</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://cdn.mos.cms.futurecdn.net/2vZU84S7dJ2AEPGD9xhVy.jpg" alt="iHeartRadio Music Award for Tour of the Century">
+                        <div class="overlay">
+                            <h2>iHeartRadio Music Award for Tour of the Century</h2>
+                            <p>In March 2025, the success of her 'Eras Tour' was recognized. However, she did not attend.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://www.goupstate.com/gcdn/authoring/2009/11/12/NHEJ/ghows-NC-57bb13ef-9a06-4f06-8c41-aee50dbf921d-25fe07bc.jpeg" alt="CMA Entertainer of the Year">
+                        <div class="overlay">
+                            <h2 style="position: relative; top: 30%;">CMA Entertainer of the Year</h2>
+                            <p style="position: relative; top: 30%;">2009, first female artist to win CMA Entertainer of the Year twice.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://people.com/thmb/BwLPlkX96rOx8YGDzC1w-g0Wxvo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(499x0:501x2)/taylor-swift55-f0b2985bdcea448f8da6e3f8d7690d43.jpg" alt="Brit Awards – Global Icon">
+                        <div class="overlay">
+                            <h2 style="position: relative; top: 35%;">Brits Award – Global Icon</h2>
+                            <p style="position: relative; top: 35%;">In 2021, Taylor was the first woman to receive the Brit Global Icon award.</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h2>Taylor and Kanye Feud at the MTV VMAs 2009</h2>
+                <div class="embed">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/G5iEniUb33w?si=jSoddW1mkQ24gpGx" title="YouTube video player" frameborder="5px" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="textbox2">
+                    <p>At the 2009 MTV Video Music Awards, Taylor Swift’s big moment was famously interrupted when Kanye West stormed the stage during her acceptance speech for Best Female Video. The shocking act left Taylor speechless and became one of the most infamous pop culture clashes of the decade. In the moment, it seemed like Taylor had lost—her celebration was overshadowed, and many questioned whether she truly belonged on that stage.</p>
+                    <p>But over time, the narrative shifted. The incident drew immense sympathy for Taylor, boosting her visibility and cementing her as an underdog the world rallied behind. While the feud resurfaced in later years, Taylor’s career only grew stronger, leading to record-breaking albums, sold-out stadium tours, and recognition as one of the most awarded artists in history. In the end, what once looked like a defeat became the spark that helped fuel her rise—Taylor may have lost the battle that night, but she undeniably won the war.</p>
+                </div>
             </div>
-            <script>
+        </div>
+        <a href="#top" id="backToTopBtn">Back to Top</a>
+        <script>
+            window.addEventListener("load", () => {
+                document.body.classList.add("loaded");
+            });
             function toggleNav(x) {
                 x.classList.toggle("change");
                 let sidebar = document.getElementById("sidebarID");
