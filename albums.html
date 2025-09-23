@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
@@ -66,7 +67,7 @@
                 100% {background-position: 100% 50%;}
             }
             @keyframes fadeIn {
-                from {opacity: 0; tranform: translateY(-10px);}
+                from {opacity: 0; transform: translateY(-10px);}
                 to {opacity: 1; transform: translateY(0);}
             }
             #overlay {
@@ -361,6 +362,7 @@
             </div>
 
             <div class="contentbox">
+                <h2>Taylor's Discography</h2>
                 <div class="albums-grid">
                     <div class="album">
                         <div class="polaroid">
@@ -887,7 +889,6 @@
                     </div>
                 </div>
                 <br><br>
-                <h2>Taylor's Discography</h2>
                 <div class="textbox">
                     <p>Taylor Swift started her career young, signing with Big Machine Records where she released her first six albums: Taylor Swift (2006), Fearless (2008), Speak Now (2010), Red (2012), 1989 (2014), and Reputation (2017). At first, she didn’t own her master recordings—meaning the actual rights to her original songs were controlled by the label. This later blew up into one of the biggest music industry feuds when Scooter Braun, a music manager she had conflicts with, bought Big Machine and gained ownership of her masters.</p>
                     <p>Taylor didn’t take that lightly. Instead of giving up her art, she began re-recording her old albums as Taylor’s Version. This allowed her to regain ownership of her work while giving fans new, often upgraded versions of the classics. So far, she has released Fearless (Taylor’s Version), Red (Taylor’s Version), Speak Now (Taylor’s Version), and 1989 (Taylor’s Version), with more to come. Each re-recorded album also came with Vault Tracks—songs she had written during the original era but never released. These became an exciting bonus for fans, almost like unlocking a secret diary she kept hidden for years.</p>
@@ -897,6 +898,7 @@
             </div>
             <audio id="player"></audio>
             <a href="#top" id="backToTopBtn">Back to Top</a>
+        </div>
         <script>
             window.addEventListener("load", () => {
                 document.body.classList.add("loaded");

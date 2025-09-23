@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
@@ -9,13 +10,18 @@
             html {
                 scroll-behavior: smooth;
                 font-size: 20px;
-                font-family: 'Montserrat'; 
+                font-family: 'Roboto Slab', serif; 
             }
             body {
                 background-image: url('taylor_swift_reputation_bg.png');
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-attachment: fixed; 
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            body.loaded {
+                opacity: 1;
             }
             .headerbg {
                 margin-top: 2vh;
@@ -49,7 +55,7 @@
                 font-weight: bolder;
                 text-shadow: 0px 0px 8px rgba(255, 192, 203, 0.8), 0 0 16px rgba(138, 43, 226, 0.6);
                 background: linear-gradient(90deg, #a8a6a6, #a64bf4, #ff69b4);
-                -webkit-background-clip: text;
+                background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-size: 300%;
                 animation: shimmer 3s linear infinite;
@@ -61,7 +67,7 @@
                 100% {background-position: 100% 50%;}
             }
             @keyframes fadeIn {
-                from {opacity: 0; tranform: translateY(-10px);}
+                from {opacity: 0; transform: translateY(-10px);}
                 to {opacity: 1; transform: translateY(0);}
             }
             #overlay {
@@ -133,13 +139,11 @@
                 bottom: 20vh;
                 margin: auto;
                 margin-bottom: -25vh;
-                width: 45%;
-                background-image: url('https://i.pinimg.com/1200x/b1/cc/3f/b1cc3f7abf857abb47181f22c187f457.jpg');
-                background-size: cover;
-                background-color: rgba(255, 255, 255, 0.85);
+                width: 100%;
+                background-color: rgba(69, 44, 44, 0.5);
                 border-radius: 10px;
-                padding: 2rem;
-                min-height: 73.5vh;
+                padding: 1rem;
+                max-height: auto;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
             @media screen and (min-height: 1081px) {
@@ -156,7 +160,7 @@
             <a href="about.html">About</a>
             <a href="albums.html">Albums</a>
             <a href="tours.html">Tours</a>
-            <a href="merch.html">Merch</a>
+            <a href="references.html">References</a>
         </div>
         <div id="overlay"></div>
         <div id="main">
