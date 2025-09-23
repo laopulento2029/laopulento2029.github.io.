@@ -164,13 +164,13 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 25px;
             }
-            .album {
-                text-align: center;
-            }
+            .album {text-align: center;}
             .polaroid {
                 background: rgb(253, 223, 178);
+                height: 20vh;
+                grid-column: span 1;
                 border: 10px solid rgb(253, 223, 178);
-                border-bottom: 30px solid rgb(253, 223, 178);
+                border-bottom: 80px solid rgb(253, 223, 178);
                 outline: 1px solid blanchedalmond;
                 padding: 10px;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -183,9 +183,9 @@
             }
             .vinyl {
                 position: absolute;
+                left: 33%;
                 top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) scale(0);
+                transform: translate(-20%, -50%) scale(0);
                 transition: transform 0.6s ease;
             }
             @keyframes spin {
@@ -193,7 +193,7 @@
                 to {transform: rotate(360deg);}
             }
             .vinyl img {
-                width: 100%;
+                width: 150%;
                 height: auto;
                 border-radius: 50%;
                 animation: spin 4s linear infinite;
@@ -201,14 +201,14 @@
             }
             .album:hover .vinyl img {animation-play-state: running;}
             .polaroid:hover .vinyl {transform: translate(-50%, -50%) scale(1);}
-            .polaroid:hover .album-cover, 
-            .polaroid:hover .album-title {
+            .polaroid:hover .album-cover {
                 opacity: 0;
                 transition: opacity 0.4s ease;
             }
             .album-title {
-                margin-top: 10px;
+                position: relative;
                 font-weight: bold;
+                bottom: 1rem;
             }
             .play-btn,
             .tracklist-btn {
@@ -231,6 +231,8 @@
                 background: #95597a;
                 transform: scale(1.05);
             }
+            .album.playing .vinyl {opacity: 1;}
+            .album.playing .album-cover {opacity: 0;}
             .tracklist {
                 list-style-type: none;
                 padding: 0;
@@ -322,75 +324,33 @@
                         <div class="polaroid">
                             <img src="https://upload.wikimedia.org/wikipedia/en/1/1f/Taylor_Swift_-_Taylor_Swift.png" alt="Taylor Swift Debut" class="album-cover">
                             <div class="vinyl">
-                                <img src="vinyl.png" alt="Vinyl Record">
+                                <img src="debut_vinyl.png" alt="Vinyl Record">
                             </div>
                             <p class="album-title">Taylor Swift (Debut)</p>
                         </div>
-
-                        <button class="play-btn" onclick="playSong('tim-mcgraw.mp3')" style="align-self: left;">▶ Play</button>
-                        <button class="tracklist-btn">Tracklist <span class="arrow" style="align-self: right;">▼</span></button>
+                        
+                        <button class="play-btn" onclick="playSong('debut.mp3', this)">Play/Pause</button>
+                        <button class="tracklist-btn">Tracklist <span class="arrow">▼</span></button>
                         <ul id=tracklist1 class="tracklist">
                             <li>Tim McGraw</li>
+                            <li>Oicture to Burn</li>
                             <li>Teardrops on My Guitar</li>
+                            <li>A Place in This World</li>
+                            <li>Cold As You</li>
+                            <li>The Outside</li>
+                            <li>Tied Together with a Smile</li>
+                            <li>Stay Beautiful</li>
+                            <li>Should've Said No</li>
+                            <li>Mary's Song (Oh My My My)</li>
                             <li>Our Song</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="album">
-                        <div class="polaroid">
-                            <img src="debut.jpg" alt="Taylor Swift Debut" class="album-cover">
-                            <div class="vinyl">
-                                <img src="vinyl.png" alt="Vinyl Record">
-                            </div>
-                            <p class="album-title">Taylor Swift (Debut)</p>
-                        </div>
-
-                        <button class="play-btn" onclick="playSong('tim-mcgraw.mp3')" style="align-self: left;">▶ Play</button>
-                        <button class="tracklist-btn">Tracklist <span class="arrow" style="align-self: right;">▼</span></button>
-                        <ul id=tracklist1 class="tracklist">
-                            <li>Tim McGraw</li>
-                            <li>Teardrops on My Guitar</li>
-                            <li>Our Song</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="album">
-                        <div class="polaroid">
-                            <img src="debut.jpg" alt="Taylor Swift Debut" class="album-cover">
-                            <div class="vinyl">
-                                <img src="vinyl.png" alt="Vinyl Record">
-                            </div>
-                            <p class="album-title">Taylor Swift (Debut)</p>
-                        </div>
-
-                        <button class="play-btn" onclick="playSong('tim-mcgraw.mp3')" style="align-self: left;">▶ Play</button>
-                        <button class="tracklist-btn">Tracklist <span class="arrow" style="align-self: right;">▼</span></button>
-                        <ul id=tracklist1 class="tracklist">
-                            <li>Tim McGraw</li>
-                            <li>Teardrops on My Guitar</li>
-                            <li>Our Song</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="album">
-                        <div class="polaroid">
-                            <img src="debut.jpg" alt="Taylor Swift Debut" class="album-cover">
-                            <div class="vinyl">
-                                <img src="vinyl.png" alt="Vinyl Record">
-                            </div>
-                            <p class="album-title">Taylor Swift (Debut)</p>
-                        </div>
-
-                        <button class="play-btn" onclick="playSong('tim-mcgraw.mp3')" style="align-self: left;">▶ Play</button>
-                        <button class="tracklist-btn">Tracklist <span class="arrow" style="align-self: right;">▼</span></button>
-                        <ul id=tracklist1 class="tracklist">
-                            <li>Tim McGraw</li>
-                            <li>Teardrops on My Guitar</li>
-                            <li>Our Song</li>
+                            <li>I'm Only Me When I'm with You</li>
+                            <li>Invisible</li>
+                            <li>A Perfectly Good Heart</li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <audio id="player"></audio>
             <a href="#top" id="backToTopBtn">Back to Top</a>
             <script>
             function toggleNav(x) {
@@ -410,15 +370,16 @@
                 }
             }
 
-            let audio = new Audio();
-
-            function playSong(file) {
-                if (!audio.paused) {
-                    audio.pause();
-                    audio.currentTime = 0;
+            function playSong(file, button) {
+                const player = document.getElementById("player");
+                if (!player.src.endsWith(file)) {
+                    player.src = file;
+                    player.load();
+                    player.play().catch(err => console.log(err));
+                    return;
                 }
-                audio.src = file;
-                audio.play();
+                if (player.paused) {player.play().catch(err => console.log(err));}
+                else {player.pause();}
             }
 
             const buttons = document.querySelectorAll(".tracklist-btn");
