@@ -16,6 +16,11 @@
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-attachment: fixed; 
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            body.loaded {
+                opacity: 1;
             }
             .headerbg {
                 margin-top: 2vh;
@@ -135,7 +140,8 @@
                 margin-bottom: -25vh;
                 width: 45%;
                 background-image: url('https://i.pinimg.com/1200x/b1/cc/3f/b1cc3f7abf857abb47181f22c187f457.jpg');
-                background-size: cover;
+                background-size: 100%;
+                background-repeat: repeat-y;
                 background-color: rgba(255, 255, 255, 0.85);
                 border-radius: 10px;
                 padding: 2rem;
@@ -243,7 +249,7 @@
                 opacity: 0;
             }
             .tracklist.open {
-                max-height: 500px;
+                max-height: 100vh;
                 opacity: 1;
             }
             .tracklist li {
@@ -285,7 +291,7 @@
                 .sidebar a {font-size: 1.5em;}
                 .titletext {font-size: 2.3em;}
                 .textbox img {width: 10%;}
-                .albums-grid {grid-template-columns: repeat(5, 1fr);}
+                .albums-grid {grid-template-columns: repeat(4, 1fr);}
             }
         </style>
         <title>Magazine: Swiftieverse</title>
@@ -352,7 +358,10 @@
             </div>
             <audio id="player"></audio>
             <a href="#top" id="backToTopBtn">Back to Top</a>
-            <script>
+        <script>
+            window.addEventListener("load", () => {
+                document.body.classList.add("loaded");
+            });
             function toggleNav(x) {
                 x.classList.toggle("change");
                 let sidebar = document.getElementById("sidebarID");
