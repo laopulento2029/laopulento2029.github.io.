@@ -145,7 +145,7 @@
                 background-color: rgba(255, 255, 255, 0.85);
                 border-radius: 10px;
                 padding: 2rem;
-                min-height: 73.5vh;
+                min-height: 100vh;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
             .contentboxP1 {position: relative;}
@@ -168,67 +168,95 @@
             .albums-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 25px;
+                width: 100%;
+                box-sizing: border-box;
+                gap: 20px;
             }
-            .album {text-align: center;}
+            .album {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+                position: relative;
+            }
             .polaroid {
                 background: rgb(253, 223, 178);
-                height: 20vh;
-                grid-column: span 1;
+                width: 100%;
+                max-width: 200px;
+                aspect-ratio: 2/3; 
                 border: 10px solid rgb(253, 223, 178);
-                border-bottom: 80px solid rgb(253, 223, 178);
                 outline: 1px solid blanchedalmond;
-                padding: 10px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
                 position: relative;
+                overflow: hidden;
                 transition: transform 0.3s ease;
+                box-sizing: border-box;
+                padding: 10px;
             }
             .album-cover {
-                width: 100%;
+                width: 90%;
                 border-radius: 6px;
+                margin-top: 5px;
             }
             .vinyl {
                 position: absolute;
-                left: 33%;
-                top: 50%;
-                transform: translate(-20%, -50%) scale(0);
-                transition: transform 0.6s ease;
+                top: 30%;
+                left: 50%;
+                width: 160px;
+                height: 160px;
+                transform: translate(-50%, -50%) scale(0);
+                transition: transform 0.6s ease, opacity 0.4s ease;
+                opacity: 0;
             }
             @keyframes spin {
                 from {transform: rotate(0deg);}
                 to {transform: rotate(360deg);}
             }
             .vinyl img {
-                width: 150%;
-                height: auto;
+                width: 100%;
+                height: 100%;
                 border-radius: 50%;
                 animation: spin 4s linear infinite;
                 animation-play-state: paused;
             }
             .album:hover .vinyl img {animation-play-state: running;}
-            .polaroid:hover .vinyl {transform: translate(-50%, -50%) scale(1);}
+            .polaroid:hover .vinyl {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
             .polaroid:hover .album-cover {
                 opacity: 0;
                 transition: opacity 0.4s ease;
             }
             .album-title {
-                position: relative;
+                margin-top: 1.5rem;
                 font-weight: bold;
-                bottom: 1rem;
+                text-align: center;
+            }
+            .album-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                align-items: center;
+                margin-top: auto;
             }
             .play-btn,
             .tracklist-btn {
-                margin-top: 0.5rem;
+                width: auto;
                 background-color: #333;
                 border: none;
                 padding: 8px 16px;
                 border-radius: 6px;
-                font-size: 1rem;
+                font-size: 0.8rem;
                 cursor: pointer;
                 color: white;
                 font-weight: bold;
                 transition: background-color 0.3s ease, transform 0.2s ease;
-                display: inline-flex;
                 align-items: center;
                 gap: 5px;
             }
@@ -240,6 +268,7 @@
             .album.playing .vinyl {opacity: 1;}
             .album.playing .album-cover {opacity: 0;}
             .tracklist {
+                position: relative;
                 list-style-type: none;
                 padding: 0;
                 margin: 10px 0 0;
@@ -263,7 +292,7 @@
                 display: inline-block;
                 transition: transform 0.3s ease;
             }
-            .tracklist-btn.active .arrow {transform: rotate(180deg); /* flips ▼ into ▲ */}
+            .tracklist-btn.active .arrow {transform: rotate(180deg);}
             #backToTopBtn {
                 position: fixed;
                 bottom: 30px;
@@ -292,6 +321,8 @@
                 .titletext {font-size: 2.3em;}
                 .textbox img {width: 10%;}
                 .albums-grid {grid-template-columns: repeat(4, 1fr);}
+                .polaroid {border-bottom: 60px solid rgb(253, 223, 178);}
+                
             }
         </style>
         <title>Magazine: Swiftieverse</title>
@@ -330,13 +361,14 @@
                         <div class="polaroid">
                             <img src="https://upload.wikimedia.org/wikipedia/en/1/1f/Taylor_Swift_-_Taylor_Swift.png" alt="Taylor Swift Debut" class="album-cover">
                             <div class="vinyl">
-                                <img src="debut_vinyl.png" alt="Vinyl Record">
+                                <img src="debut_vinyl.png" alt="Debut Vinyl">
                             </div>
-                            <p class="album-title">Taylor Swift (Debut)</p>
+                            <p class="album-title">Taylor Swift (Debut) (2006)</p>
                         </div>
-                        
-                        <button class="play-btn" onclick="playSong('debut.mp3', this)">Play/Pause</button>
-                        <button class="tracklist-btn">Tracklist <span class="arrow">▼</span></button>
+                        <div class="album-buttons">
+                            <button class="play-btn" onclick="playSong('debut.mp3', this)">Play/Pause</button>
+                            <button class="tracklist-btn">Tracklist <span class="arrow">▼</span></button>
+                        </div>
                         <ul id=tracklist1 class="tracklist">
                             <li>Tim McGraw</li>
                             <li>Oicture to Burn</li>
@@ -352,6 +384,68 @@
                             <li>I'm Only Me When I'm with You</li>
                             <li>Invisible</li>
                             <li>A Perfectly Good Heart</li>
+                        </ul>
+                    </div>
+                    <div class="album">
+                        <div class="polaroid">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png" alt="Fearless" class="album-cover">
+                            <div class="vinyl">
+                                <img src="fearless_vinyl.png" alt="Fearless Vinyl">
+                            </div>
+                            <p class="album-title">Fearless (2008)</p>
+                        </div>
+                        <div class="album-buttons">
+                            <button class="play-btn" onclick="playSong('fearless.mp3', this)">Play/Pause</button>
+                            <button class="tracklist-btn">Tracklist <span class="arrow">▼</span></button>
+                        </div>
+                        <ul id=tracklist2 class="tracklist">
+                            <li>Fearless</li>
+                            <li>Fifteen</li>
+                            <li>Love Story</li>
+                            <li>Hey Stephen</li>
+                            <li>White Horse</li>
+                            <li>You Belong with Me</li>
+                            <li>Breathe (feat. Colbie Caillat)</li>
+                            <li>Tell Me Why</li>
+                            <li>You're Not Sorry</li>
+                            <li>The Way I Loved You</li>
+                            <li>Forever & Always</li>
+                            <li>The Best Day</li>
+                            <li>Change</li>
+                            <li>Jump Then Fall</li>
+                            <li>Untouchable</li>
+                        </ul>
+                    </div>
+                    <div class="album">
+                        <div class="polaroid">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Taylor_Swift_-_Speak_Now_cover.png/250px-Taylor_Swift_-_Speak_Now_cover.png" alt="Speak Now" class="album-cover">
+                            <div class="vinyl">
+                                <img src="speaknow_vinyl.png" alt="Speak Now Vinyl">
+                            </div>
+                            <p class="album-title">Speak Now (2010)</p>
+                        </div>
+                        <div class="album-buttons">
+                            <button class="play-btn" onclick="playSong('speaknow.mp3', this)">Play/Pause</button>
+                            <button class="tracklist-btn">Tracklist <span class="arrow">▼</span></button>
+                        </div>
+                        <ul id=tracklist3 class="tracklist">
+                            <li>Mine</li>
+                            <li>Sparks Fly</li>
+                            <li>Back to December</li>
+                            <li>Speak Now</li>
+                            <li>Dear John</li>
+                            <li>Mean</li>
+                            <li>The Story of Us</li>
+                            <li>Never Grow Up</li>
+                            <li>Enchanted</li>
+                            <li>Better than Revenge</li>
+                            <li>Innocent</li>
+                            <li>Haunted</li>
+                            <li>Last Kiss</li>
+                            <li>Long Live</li>
+                            <li>Ours</li>
+                            <li>If This Was a Movie</li>
+                            <li>Superman</li>
                         </ul>
                     </div>
                 </div>
@@ -395,9 +489,12 @@
 
             buttons.forEach(button => {
                 button.addEventListener("click", () => {
-                    const tracklist = button.nextElementSibling; // <ul>
-                    tracklist.classList.toggle("open");
-                    button.classList.toggle("active"); // rotate arrow
+                    const album = button.closest(".album");
+                    const tracklist = album.querySelector(".tracklist");
+                    if(tracklist) {
+                        tracklist.classList.toggle("open");
+                        button.classList.toggle("active"); 
+                    }
                 });
             });
         </script>
