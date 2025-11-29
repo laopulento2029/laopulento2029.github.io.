@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,8 +36,9 @@
         }
 
         .nav-link:hover {
-            background-color: #5abf9a;
-        }
+			background-color: #5abf9a;
+			color: white !important;
+		}
 
         .landmark-card {
             position: relative;
@@ -181,10 +183,14 @@
                         <a class="nav-link" href="delicacies.html">Delicacies</a>
                     </li>
                 </ul>
-                <form class="d-flex" action="results.html" method="GET">
-                    <input class="form-control me-2" type="search" placeholder="design only" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <form id="siteSearch" class="d-flex" onsubmit="return handleSearch(event)">
+					<input id="searchInput" class="form-control me-2" type="search" placeholder="Search..."
+						aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+
+				<div id="searchFeedback" class="mx-2 text-danger" style="display:none;"></div>
+				<div id="searchSuggestions" class="mx-1" style="display:none;">	</div>
             </div>
         </div>
     </nav>
@@ -336,7 +342,10 @@
                         class="card-img-top" alt="Batanes E">
                     <div class="landmark-info">
                         <h4 class="mt-5">Batanes of the East</h4>
-                        <p class="flex-grow-1">Dubbed the “Batanes of the East,” the coastal landscapes of Dingalan, Aurora feature rolling hills, dramatic cliffs, and panoramic ocean views reminiscent of the northernmost islands of the Philippines. It’s a favorite spot for photographers, hikers, and travelers seeking peaceful, untouched scenery.</p>
+                        <p class="flex-grow-1">Dubbed the “Batanes of the East,” the coastal landscapes of Dingalan,
+                            Aurora feature rolling hills, dramatic cliffs, and panoramic ocean views reminiscent of the
+                            northernmost islands of the Philippines. It’s a favorite spot for photographers, hikers, and
+                            travelers seeking peaceful, untouched scenery.</p>
                         <a href="https://maps.app.goo.gl/knBQGBQMzGXXFqWU7" class="btn btn-info mt-2">View on
                             Map</a>
                     </div>
@@ -349,7 +358,10 @@
                         class="card-img-top" alt="Dinadiawan">
                     <div class="landmark-info">
                         <h4 class="mt-5">Dinadiawan Beach</h4>
-                        <p class="flex-grow-1">Found in Sabang, Baler, Dinadiawan Beach has a long stretch of golden sand and gentle waves. It’s perfect for swimming, surfing, or just walking along the shore. The beach is lined with coconut trees that provide shade, making it a great spot for families or friends to relax and enjoy a day by the sea. </p>
+                        <p class="flex-grow-1">Found in Sabang, Baler, Dinadiawan Beach has a long stretch of golden
+                            sand and gentle waves. It’s perfect for swimming, surfing, or just walking along the shore.
+                            The beach is lined with coconut trees that provide shade, making it a great spot for
+                            families or friends to relax and enjoy a day by the sea. </p>
                         <a href="https://maps.app.goo.gl/dq4fTExbxvNM3dwZ6" class="btn btn-info mt-2">View on
                             Map</a>
                     </div>
@@ -362,7 +374,10 @@
                         class="card-img-top" alt="Aniao Islet">
                     <div class="landmark-info">
                         <h4 class="mt-5">Aniao Islet</h4>
-                        <p class="flex-grow-1">Just off the coast of Baler, Aurora, Aniao Islet is a small island with clear water and colorful fish, perfect for snorkeling or swimming. The soft sandy shore is ideal for relaxing and enjoying the sun. Its calm and quiet surroundings make it a great place to spend a peaceful day away from the crowd..</p>
+                        <p class="flex-grow-1">Just off the coast of Baler, Aurora, Aniao Islet is a small island with
+                            clear water and colorful fish, perfect for snorkeling or swimming. The soft sandy shore is
+                            ideal for relaxing and enjoying the sun. Its calm and quiet surroundings make it a great
+                            place to spend a peaceful day away from the crowd..</p>
                         <a href="https://maps.app.goo.gl/8mL94ReSSRw2c1AS9" class="btn btn-info mt-2">View on
                             Map</a>
                     </div>
@@ -375,7 +390,8 @@
                         class="card-img-top" alt="diguisit">
                     <div class="landmark-info">
                         <h4 class="mt-5">Diguisit Beach</h4>
-                        <p class="flex-grow-1">A serene beach in Baler with soft sand and gentle waves. Great for swimming, picnics, or simply soaking up the quiet seaside vibe.</p>
+                        <p class="flex-grow-1">A serene beach in Baler with soft sand and gentle waves. Great for
+                            swimming, picnics, or simply soaking up the quiet seaside vibe.</p>
                         <a href="https://maps.app.goo.gl/fKzzaNFDr98Lk9qA8" class="btn btn-info mt-2">View on
                             Map</a>
                     </div>
@@ -383,8 +399,151 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+    <script>
+		const pages = {
+			'home': 'index.html',
+			'about': 'about.html',
+			'history': 'about.html',
+			'pampanga': 'about.html',
+			'aurora': 'about.html',
+			'map': 'about.html',
+			'hotel': 'hotels.html',
+			'hotels': 'hotels.html',
+			'hilton': 'hotels.html',
+			'marriott': 'hotels.html',
+			'fontana': 'hotels.html',
+			'midori': 'hotels.html',
+			'hann': 'hotels.html',
+			'abc': 'hotels.html',
+			'costa pacifica': 'hotels.html',
+			'sirene': 'hotels.html',
+			'pool': 'hotels.html',
+			'resort': 'hotels.html',
+			'casino': 'hotels.html',
+			'nulu': 'hotels.html',
+			'camp': 'hotels.html',
+			'bay inn': 'hotels.html',
+			'inn': 'hotels.html',
+			'cube': 'hotels.html',
+			'cove': 'hotels.html',
+			'bay': 'landmarks.html',
+			'landmark': 'landmarks.html',
+			'landmarks': 'landmarks.html',
+			'aqua planet': 'landmarks.html',
+			'dicasalarin': 'landmarks.html',
+			'puning': 'landmarks.html',
+			'church': 'landmarks.html',
+			'betis': 'landmarks.html',
+			'rides': 'landmarks.html',
+			'sky ranch': 'landmarks.html',
+			'nayong pilipino': 'landmarks.html',
+			'aniao islet': 'landmarks.html',
+			'diguisit beach': 'landmarks.html',
+			'dingalan': 'landmarks.html',
+			'cdc parade grounds': 'landmarks.html',
+			'cdc': 'landmarks.html',
+			'parade grounds': 'landmarks.html',
+			'park': 'landmarks.html',
+			'field': 'landmarks.html',
+			'nature': 'landmarks.html',
+			'waterpark': 'landmarks.html',
+			'water park': 'landmarks.html',
+			'water': 'landmarks.html',
+			'falls': 'landmarks.html',
+			'mountain': 'landmarks.html',
+			'hiking': 'landmarks.html',
+			'beach': 'landmarks.html',
+			'dinadiawan': 'landmarks.html',
+			'food': 'delicacies.html',
+			'delicacy': 'delicacies.html',
+			'delicacies': 'delicacies.html',
+			'sisig': 'delicacies.html',
+			'bringhe': 'delicacies.html',
+			'buro': 'delicacies.html',
+			'kakanin': 'delicacies.html',
+			'halo halo': 'delicacies.html',
+			'betute': 'delicacies.html',
+			'camaro': 'delicacies.html',
+			'kamaru': 'delicacies.html',
+			'atchara': 'delicacies.html',
+			'longganisa': 'delicacies.html',
+			'tocino': 'delicacies.html',
+			'putobumbong': 'delicacies.html',
+			'puto': 'delicacies.html',
+			'tibok': 'delicacies.html',
+			'tibok-tibok': 'delicacies.html',
+			'suman': 'delicacies.html',
+			'tuna': 'delicacies.html',
+			'yellowfin': 'delicacies.html',
+			'yellow fin': 'delicacies.html',
+			'kinilaw': 'delicacies.html',
+			'tambakol': 'delicacies.html',
+			'adobo': 'delicacies.html',
+			'pusit': 'delicacies.html',
+			'sugpo': 'delicacies.html',
+			'ginataan': 'delicacies.html',
+			'pako': 'delicacies.html',
+			'salad': 'delicacies.html',
+			'pakumbo': 'delicacies.html',
+			'buko': 'delicacies.html',
+			'pie': 'delicacies.html'
+		};
+		function similarity(s1, s2) {
+			s1 = s1.toLowerCase();
+			s2 = s2.toLowerCase();
+			let longer = s1.length > s2.length ? s1 : s2;
+			let shorter = s1.length > s2.length ? s2 : s1;
+			if (longer.length === 0) return 1.0;
+			let editDistance = levenshtein(longer, shorter);
+			return (longer.length - editDistance) / parseFloat(longer.length);
+		}
+
+		function levenshtein(a, b) {
+			const matrix = [];
+			for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+			for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+			for (let i = 1; i <= b.length; i++) {
+				for (let j = 1; j <= a.length; j++) {
+					if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+					else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+				}
+			}
+			return matrix[b.length][a.length];
+		}
+
+		function handleSearch(event) {
+			event.preventDefault();
+			const query = document.getElementById('searchInput').value.toLowerCase().trim();
+			const feedback = document.getElementById('searchFeedback');
+			const suggestionsDiv = document.getElementById('searchSuggestions');
+
+			feedback.style.display = 'none';
+			suggestionsDiv.style.display = 'none';
+			suggestionsDiv.innerHTML = '';
+
+			for (const key in pages) {
+				if (query.includes(key)) {
+					window.location.href = pages[key];
+					return false;
+				}
+			}
+
+			const suggestions = [];
+			for (const key in pages) {
+				if (similarity(query, key) > 0.4) suggestions.push(key);
+			}
+
+			feedback.style.display = 'block';
+			feedback.textContent = 'No results.';
+
+			if (suggestions.length) {
+				suggestionsDiv.style.display = 'block';
+				suggestionsDiv.innerHTML = 'Did you mean: ' + suggestions.map(s => `<span style="background:#ffeeba;padding:2px 6px;border-radius:4px;margin-right:4px;">${s}</span>`).join('');
+			}
+
+			return false;
+		}
+	</script>
 </body>
 
 </html>

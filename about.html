@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -234,10 +235,14 @@
                     <li class="nav-item"><a class="nav-link" href="landmarks.html">Landmarks</a></li>
                     <li class="nav-item"><a class="nav-link" href="delicacies.html">Delicacies</a></li>
                 </ul>
-                <form class="d-flex" action="results.html" method="GET">
-                    <input class="form-control me-2" type="search" placeholder="design only" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <form id="siteSearch" class="d-flex" onsubmit="return handleSearch(event)">
+					<input id="searchInput" class="form-control me-2" type="search" placeholder="Search..."
+						aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+
+				<div id="searchFeedback" class="mx-2 text-danger" style="display:none;"></div>
+				<div id="searchSuggestions" class="mx-1" style="display:none;">	</div>
             </div>
         </div>
     </nav>
@@ -284,7 +289,7 @@
         <div class="map-box pampanga-map">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d38719.9798953402!2d120.555855!3d15.034152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33967d16854004a7%3A0x2c3a6efc7ec7c6e1!2sPampanga%2C%20Central%20Luzon%2C%20Philippines!5e0!3m2!1sen!2sus!4v1701234567890!5m2!1sen!2sus"
-                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                width="800" height="350" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>
@@ -307,11 +312,156 @@
         <div class="map-box aurora-map">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19114.45521272677!2d121.5664!3d15.7569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3396a7f2a2c87cbd%3A0x36bba0287d4d4c4a!2sBaler%2C%20Aurora%2C%20Philippines!5e0!3m2!1sen!2sus!4v1701234567892!5m2!1sen!2sus"
-                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                width="800" height="350" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>
     </section>
+    <script>
+		const pages = {
+			'home': 'index.html',
+			'about': 'about.html',
+			'history': 'about.html',
+			'pampanga': 'about.html',
+			'aurora': 'about.html',
+			'map': 'about.html',
+			'hotel': 'hotels.html',
+			'hotels': 'hotels.html',
+			'hilton': 'hotels.html',
+			'marriott': 'hotels.html',
+			'fontana': 'hotels.html',
+			'midori': 'hotels.html',
+			'hann': 'hotels.html',
+			'abc': 'hotels.html',
+			'costa pacifica': 'hotels.html',
+			'sirene': 'hotels.html',
+			'pool': 'hotels.html',
+			'resort': 'hotels.html',
+			'casino': 'hotels.html',
+			'nulu': 'hotels.html',
+			'camp': 'hotels.html',
+			'bay inn': 'hotels.html',
+			'inn': 'hotels.html',
+			'cube': 'hotels.html',
+			'cove': 'hotels.html',
+			'bay': 'landmarks.html',
+			'landmark': 'landmarks.html',
+			'landmarks': 'landmarks.html',
+			'aqua planet': 'landmarks.html',
+			'dicasalarin': 'landmarks.html',
+			'puning': 'landmarks.html',
+			'church': 'landmarks.html',
+			'betis': 'landmarks.html',
+			'rides': 'landmarks.html',
+			'sky ranch': 'landmarks.html',
+			'nayong pilipino': 'landmarks.html',
+			'aniao islet': 'landmarks.html',
+			'diguisit beach': 'landmarks.html',
+			'dingalan': 'landmarks.html',
+			'cdc parade grounds': 'landmarks.html',
+			'cdc': 'landmarks.html',
+			'parade grounds': 'landmarks.html',
+			'park': 'landmarks.html',
+			'field': 'landmarks.html',
+			'nature': 'landmarks.html',
+			'waterpark': 'landmarks.html',
+			'water park': 'landmarks.html',
+			'water': 'landmarks.html',
+			'falls': 'landmarks.html',
+			'mountain': 'landmarks.html',
+			'hiking': 'landmarks.html',
+			'beach': 'landmarks.html',
+			'dinadiawan': 'landmarks.html',
+			'food': 'delicacies.html',
+			'delicacy': 'delicacies.html',
+			'delicacies': 'delicacies.html',
+			'sisig': 'delicacies.html',
+			'bringhe': 'delicacies.html',
+			'buro': 'delicacies.html',
+			'kakanin': 'delicacies.html',
+			'halo halo': 'delicacies.html',
+			'betute': 'delicacies.html',
+			'camaro': 'delicacies.html',
+			'kamaru': 'delicacies.html',
+			'atchara': 'delicacies.html',
+			'longganisa': 'delicacies.html',
+			'tocino': 'delicacies.html',
+			'putobumbong': 'delicacies.html',
+			'puto': 'delicacies.html',
+			'tibok': 'delicacies.html',
+			'tibok-tibok': 'delicacies.html',
+			'suman': 'delicacies.html',
+			'tuna': 'delicacies.html',
+			'yellowfin': 'delicacies.html',
+			'yellow fin': 'delicacies.html',
+			'kinilaw': 'delicacies.html',
+			'tambakol': 'delicacies.html',
+			'adobo': 'delicacies.html',
+			'pusit': 'delicacies.html',
+			'sugpo': 'delicacies.html',
+			'ginataan': 'delicacies.html',
+			'pako': 'delicacies.html',
+			'salad': 'delicacies.html',
+			'pakumbo': 'delicacies.html',
+			'buko': 'delicacies.html',
+			'pie': 'delicacies.html'
+		};
+		function similarity(s1, s2) {
+			s1 = s1.toLowerCase();
+			s2 = s2.toLowerCase();
+			let longer = s1.length > s2.length ? s1 : s2;
+			let shorter = s1.length > s2.length ? s2 : s1;
+			if (longer.length === 0) return 1.0;
+			let editDistance = levenshtein(longer, shorter);
+			return (longer.length - editDistance) / parseFloat(longer.length);
+		}
+
+		function levenshtein(a, b) {
+			const matrix = [];
+			for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+			for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+			for (let i = 1; i <= b.length; i++) {
+				for (let j = 1; j <= a.length; j++) {
+					if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+					else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+				}
+			}
+			return matrix[b.length][a.length];
+		}
+
+		function handleSearch(event) {
+			event.preventDefault();
+			const query = document.getElementById('searchInput').value.toLowerCase().trim();
+			const feedback = document.getElementById('searchFeedback');
+			const suggestionsDiv = document.getElementById('searchSuggestions');
+
+			feedback.style.display = 'none';
+			suggestionsDiv.style.display = 'none';
+			suggestionsDiv.innerHTML = '';
+
+			for (const key in pages) {
+				if (query.includes(key)) {
+					window.location.href = pages[key];
+					return false;
+				}
+			}
+
+			const suggestions = [];
+			for (const key in pages) {
+				if (similarity(query, key) > 0.4) suggestions.push(key);
+			}
+
+			feedback.style.display = 'block';
+			feedback.textContent = 'No results.';
+
+			if (suggestions.length) {
+				suggestionsDiv.style.display = 'block';
+				suggestionsDiv.innerHTML = 'Did you mean: ' + suggestions.map(s => `<span style="background:#ffeeba;padding:2px 6px;border-radius:4px;margin-right:4px;">${s}</span>`).join('');
+			}
+
+			return false;
+		}
+	</script>
 </body>
 
 </html>
