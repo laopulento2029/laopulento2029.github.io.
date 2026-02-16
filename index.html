@@ -110,6 +110,14 @@
             box-shadow: 0 0 50px #00ffff;
         }
     </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("startBtn").addEventListener("click", function () {
+                window.location.href = "game.html";
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -127,6 +135,7 @@
             <p class="subtitle">Survive the Maze. Conquer the Mind. Survive!</p>
             <button id="startBtn" class="start-button">▶ START GAME</button>
         </div>
+    </div>
 </body>
 
 </html>
