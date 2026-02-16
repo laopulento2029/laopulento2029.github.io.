@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Escape: Maze & Mind</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("https://m.media-amazon.com/images/I/61L5DhcQQ5L.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: 0;
+            font-family: "Pixelify Sans", serif;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(25, 25, 25, 0.55);
+            z-index: -1;
+        }
+
+        .top-nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 3;
+            font-family: 'Pixelify Sans', sans-serif;
+        }
+
+        .nav-left {
+            font-size: 22px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-right a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-right a:hover {
+            color: #00ffff;
+        }
+
+        h1 {
+            font-size: 36pt;
+            margin-top: 1in;
+            color: white;
+        }
+
+        .stats {
+            font-family: "Fredoka", serif;
+            font-weight: 500;
+            color: white;
+        }
+
+        #dayTitle {
+            font-family: "Permanent Marker", serif;
+            text-shadow: 0 0 3px #ffffff75, 0 0 6px #ffffff75, 0 0 12px #ffffff75,
+                0 0 24px #ffffff75;
+            letter-spacing: 3px;
+        }
+
+        #statsPanel {
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.35s ease, filter 0.35s ease;
+            z-index: 5;
+            position: relative;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(6px);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .overlay-card {
+            background: #111;
+            color: white;
+            padding: 30px 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            animation: popIn 0.35s cubic-bezier(0.22, 1.4, 0.36, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .story {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+        }
+
+        .story-box {
+            background: #111;
+            color: white;
+            padding: 25px;
+            border-radius: 18px;
+            width: 420px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
+            animation: popIn 0.35s ease;
+        }
+
+        .story-img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        #gameCanvas {
+            width: auto;
+            height: auto;
+            display: block;
+            background: #1a1a1a;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+            color: black;
+            margin: 20px auto;
+
+            z-index: 1;
+        }
+
+        #eventBox {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            z-index: 5;
+        }
+
+        #instructions {
+            width: 420px;
+            margin: 30px auto;
+            background-color: black;
+            color: white;
+        }
+    </style>
+
+    <script>
+        const STATE = {
+            STORY: "story",
+            PLAYING: "playing",
+            QUIZ: "quiz",
+            GAMEOVER: "gameover"
+        };
+        let gameState = STATE.STORY;
+
+        let day = 1;
+        let energy = 40;
+        let stress = 60;
+        let knowledge = 0;
+
+        let tile = 32;
+        let cols, rows;
+        let map = [];
+        let player = { x: 1, y: 1 };
+        let finish = { x: 0, y: 0 };
+
+        let storyIndex = 0;
+        let currentStory = [];
+
+        let quizTiles = [];
+        let eventTiles = [];
+        let mazeStoryQueue = [];
+        let storyTriggers = [];
+
+        const storyScenes = {
+            1: [
+                {
+                    img:
+                        "https://thumbs.dreamstime.com/b/overwhelmed-student-sits-desk-stacks-books-papers-notes-chaos-scene-represents-stress-pressure-studying-335739991.jpg",
+                    text: "Day 1: The first day of your mini semester. Stay alert!"
+                },
+                {
+                    img:
+                        "https://static.vecteezy.com/system/resources/thumbnails/071/881/641/small/school-hallway-with-colorful-graffiti-on-lockers-photo.jpg",
+                    text: "Navigate the hallway maze carefully."
+                }
+            ],
+            2: [
+                {
+                    img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173",
+                    text: "Day 2: Quizzes start coming fast. Keep your energy up!"
+                }
+            ],
+            3: [
+                {
+                    img: "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
+                    text: "Day 3: EXAM DAY. Knowledge matters most!"
+                }
+            ]
+        };
+
+        const titles = ["Day 1", "Day 2", "Day 3"];
+        const colors = ["#89cff0", "#FDFD96", "#77DD77"];
+
+        let canvas = document.getElementById("gameCanvas");
+        let ctx = canvas.getContext("2d");
+
+        const floor = new Image();
+        floor.src =
+            "https://previews.123rf.com/images/sakda123/sakda1231608/sakda123160800061/61197670-white-tiles-textures-background.jpg";
+        const wall = new Image();
+        wall.src =
+            "https://thumbs.dreamstime.com/b/brick-backdrop-cartoon-wall-41195052.jpg";
+        const playerImg = new Image();
+        playerImg.src =
+            "https://png.pngtree.com/png-vector/20241204/ourmid/pngtree-smiling-school-boy-waving-in-uniform-png-image_14583466.png";
+        const door = new Image();
+        door.src =
+            "https://png.pngtree.com/png-vector/20230822/ourmid/pngtree-illustration-of-a-cartoon-door-with-windows-and-a-door-at-vector-png-image_7031620.png";
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            cols = Math.floor(canvas.width / tile);
+            rows = Math.floor(canvas.height / tile);
+        }
+        resize();
+        window.onresize = resize;
+
+        function startStory(d) {
+            gameState = STATE.STORY;
+            currentStory = storyScenes[d];
+            storyIndex = 0;
+            document.getElementById("storyScreen").classList.remove("hidden");
+            showSlide(d);
+        }
+
+        function showSlide(d) {
+            let s = currentStory[storyIndex];
+            document.getElementById("storyImage").src = s.img;
+            document.getElementById("storyText").textContent = s.text;
+            document.getElementById("dayTitle").textContent = titles[d - 1];
+            document.getElementById("dayTitle").style.color = colors[d - 1];
+        }
+
+        function showSlideStoryTrigger() {
+            let s = mazeStoryQueue[storyIndex];
+            document.getElementById("storyImage").src = s.img;
+            document.getElementById("storyText").textContent = s.text;
+            document.getElementById("dayTitle").textContent = "Day " + day + " Event";
+            document.getElementById("dayTitle").style.color = colors[day - 1];
+        }
+
+        document.getElementById("storyNext").onclick = () => {
+            if (mazeStoryQueue.length > 0) {
+                storyIndex++;
+                if (storyIndex >= mazeStoryQueue.length) {
+                    document.getElementById("storyScreen").classList.add("hidden");
+                    gameState = STATE.PLAYING;
+                    mazeStoryQueue = [];
+                } else showSlideStoryTrigger();
+            } else {
+                storyIndex++;
+                if (storyIndex >= currentStory.length) {
+                    document.getElementById("storyScreen").classList.add("hidden");
+                    generateMaze(day);
+                    gameState = STATE.PLAYING;
+                } else showSlide(day);
+            }
+        };
+
+        function setupStoryTriggers() {
+            storyTriggers = [
+                {
+                    day: 1,
+                    x: 3,
+                    y: 2,
+                    triggered: false,
+                    slides: [
+                        { img: "pic1.jpg", text: "You enter the hallway..." },
+                        { img: "pic2.jpg", text: "A friend waves at you!" }
+                    ]
+                },
+                {
+                    day: 1,
+                    x: 5,
+                    y: 2,
+                    triggered: false,
+                    slides: [
+                        { img: "pic3.jpg", text: "Found a lost notebook..." },
+                        { img: "pic4.jpg", text: "This will help later!" }
+                    ]
+                },
+                {
+                    day: 2,
+                    x: 10,
+                    y: 3,
+                    triggered: false,
+                    slides: [{ img: "pic5.jpg", text: "Overheard quiz hints." }]
+                },
+                {
+                    day: 3,
+                    x: 8,
+                    y: 7,
+                    triggered: false,
+                    slides: [{ img: "pic6.jpg", text: "Exam room ahead. Deep breath!" }]
+                }
+            ];
+        }
+
+        function generateMaze(d) {
+            quizTiles = [];
+            eventTiles = [];
+            if (d === 1) {
+                map = [
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1],
+                    [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 2, 1],
+                    [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
+                    [1, 3, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+                    [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
+                    [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                    [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+                    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 9, 1],
+                    [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                ];
+            } else if (d === 2) {
+                map = [
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+                    [1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1],
+                    [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1],
+                    [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1],
+                    [1, 2, 0, 0, 0, 3, 1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 1],
+                    [1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                    [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+                    [1, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 1],
+                    [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                ];
+            } else if (d === 3) {
+                map = [
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1],
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1],
+                    [1, 3, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 1],
+                    [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1],
+                    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+                    [1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+                    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 1],
+                    [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+                    [1, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 1],
+                    [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                ];
+            }
+            player = { x: 1, y: 1 };
+            for (let y = 0; y < map.length; y++) {
+                for (let x = 0; x < map[y].length; x++) {
+                    if (map[y][x] === 2) quizTiles.push({ x: x, y: y });
+                    if (map[y][x] === 3) eventTiles.push({ x: x, y: y });
+                    if (map[y][x] === 9) finish = { x: x, y: y };
+                }
+            }
+        }
+
+        function draw() {
+            for (let y = 0; y < map.length; y++) {
+                for (let x = 0; x < map[y].length; x++) {
+                    if (map[y][x] === 1) ctx.drawImage(wall, x * tile, y * tile, tile, tile);
+                    else ctx.drawImage(floor, x * tile, y * tile, tile, tile);
+                    if (map[y][x] === 2) {
+                        ctx.fillStyle = "cyan";
+                        ctx.fillRect(x * tile + 8, y * tile + 8, tile - 16, tile - 16);
+                    }
+                    if (map[y][x] === 3) {
+                        ctx.fillStyle = "yellow";
+                        ctx.fillRect(x * tile + 10, y * tile + 10, tile - 20, tile - 20);
+                    }
+                }
+            }
+            ctx.drawImage(playerImg, player.x * tile, player.y * tile, tile, tile);
+            ctx.drawImage(door, finish.x * tile, finish.y * tile, tile, tile);
+            document.getElementById("knowledgeBar").style.width = knowledge + "%";
+            document.getElementById("energyBar").style.width = energy + "%";
+            document.getElementById("stressBar").style.width = stress + "%";
+            requestAnimationFrame(draw);
+        }
+
+        function move(dx, dy) {
+            if (gameState !== STATE.PLAYING) return;
+            let nx = player.x + dx,
+                ny = player.y + dy;
+            if (map[ny] && map[ny][nx] !== 1) {
+                player.x = nx;
+                player.y = ny;
+
+                // story triggers
+                for (let s of storyTriggers) {
+                    if (
+                        !s.triggered &&
+                        s.day === day &&
+                        player.x === s.x &&
+                        player.y === s.y
+                    ) {
+                        s.triggered = true;
+                        gameState = STATE.STORY;
+                        currentStory = [];
+                        mazeStoryQueue = s.slides;
+                        storyIndex = 0;
+                        document.getElementById("storyScreen").classList.remove("hidden");
+                        showSlideStoryTrigger();
+                        return;
+                    }
+                }
+
+                // quiz/event
+                if (map[ny][nx] === 2) {
+                    map[ny][nx] = 0;
+                    triggerQuiz();
+                }
+                if (map[ny][nx] === 3) {
+                    map[ny][nx] = 0;
+                    triggerEvent();
+                }
+
+                energy -= 0.4;
+                stress += 0.3;
+                knowledge += 0.1;
+                checkFinish();
+                checkFail();
+            }
+        }
+
+        function triggerQuiz() {
+            gameState = STATE.QUIZ;
+            const eventBox = document.getElementById("eventBox");
+            const eventText = document.getElementById("eventText");
+            const eventChoices = document.getElementById("eventChoices");
+            eventBox.classList.remove("hidden");
+            eventChoices.innerHTML = "";
+
+            const questions = [
+                {
+                    q:
+                        "A patient has a mutation that prevents helper T cells from activating. Which outcome is most likely?",
+                    correct:
+                        "Severely reduced antibody production and weak cytotoxic response",
+                    wrong: [
+                        "Normal antibody production but reduced phagocytosis",
+                        "Increased neutrophil activity compensates fully"
+                    ]
+                },
+
+                {
+                    q:
+                        "During a secondary immune response, antibody levels rise faster mainly because:",
+                    correct: "Memory B cells require less activation to differentiate",
+                    wrong: [
+                        "Plasma cells live longer after first infection",
+                        "Antigens bind more strongly the second time"
+                    ]
+                },
+
+                {
+                    q:
+                        "A person inhales carbon monoxide. Oxygen levels in the alveoli remain normal, yet tissues become hypoxic. Why?",
+                    correct: "CO binds hemoglobin with higher affinity than oxygen",
+                    wrong: [
+                        "CO damages the alveolar membrane",
+                        "CO prevents diffusion of oxygen into blood"
+                    ]
+                },
+
+                {
+                    q:
+                        "Which molecule would experience the strongest overall intermolecular forces?",
+                    correct: "CH₃OH",
+                    wrong: ["CH₃CH₃", "CH₃OCH₃"]
+                },
+
+                {
+                    q:
+                        "A 0.205 g sample containing a mixture of Na₂SO₄ and K₂SO₄ was treated with excess BaCl₂, forming 0.300 g of BaSO₄ precipitate. What are the percent compositions of Na₂SO₄ and K₂SO₄ in the original sample?",
+                    correct: "58% Na₂SO₄ and 42% K₂SO₄",
+                    wrong: ["42% Na₂SO₄ and 58% K₂SO₄", "50% Na₂SO₄ and 50% K₂SO₄"]
+                },
+
+                {
+                    q: "In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, which species is reduced?",
+                    correct: "Cu²⁺",
+                    wrong: ["Zn", "Zn²⁺"]
+                },
+
+                {
+                    q: "The sum of the interior angles of a hexagon is:",
+                    correct: "720°",
+                    wrong: ["540°", "900°"]
+                },
+
+                {
+                    q:
+                        "A regular hexagon inscribed in a circle has side length equal to the:",
+                    correct: "Radius",
+                    wrong: ["Diameter", "Apothem"]
+                },
+
+                {
+                    q:
+                        "Why don’t eclipses happen every month even though the Moon orbits the Earth monthly?",
+                    correct: "The Moon’s orbit is slightly tilted relative to Earth’s orbit",
+                    wrong: [
+                        "The Moon is too small to block the Sun every month",
+                        "The Earth’s rotation prevents alignment"
+                    ]
+                },
+
+                {
+                    q:
+                        "Plate tectonics is responsible for both earthquakes and mountain formation because:",
+                    correct:
+                        "The Earth’s crust is divided into moving plates that collide or slide past each other",
+                    wrong: [
+                        "Continents float on water",
+                        "The Earth’s core generates volcanic eruptions"
+                    ]
+                },
+
+                {
+                    q: "The Danube River flows through all EXCEPT which country?",
+                    correct: "Spain",
+                    wrong: ["Germany", "Hungary"]
+                },
+
+                {
+                    q: "Which country has the longest coastline in the world?",
+                    correct: "Canada",
+                    wrong: ["Australia", "Russia"]
+                },
+
+                {
+                    q:
+                        "Which molecule stores the most energy per gram for long-term energy use in humans?",
+                    correct: "Triglycerides",
+                    wrong: ["Glycogen", "ATP"]
+                },
+
+                {
+                    q: "Which coenzyme is an electron carrier in cellular respiration?",
+                    correct: "NAD⁺",
+                    wrong: ["Coenzyme A", "ATP"]
+                },
+
+                {
+                    q:
+                        "Which molecule is a common allosteric inhibitor of phosphofructokinase in glycolysis?",
+                    correct: "ATP",
+                    wrong: ["Glucose", "NAD⁺"]
+                }
+            ];
+            const question = questions[Math.floor(Math.random() * questions.length)];
+            eventText.textContent = question.q;
+
+            const correctBtn = document.createElement("button");
+            correctBtn.className = "btn m-1";
+            correctBtn.textContent = question.correct;
+            correctBtn.onclick = () => {
+                knowledge += 20;
+                energy += 10;
+                stress -= 10;
+                showStatPopup("+20 Knowledge\n+5 Energy\n-5 Stress", "green");
+                eventBox.classList.add("hidden");
+                gameState = STATE.PLAYING;
+            };
+            eventChoices.appendChild(correctBtn);
+
+            question.wrong.forEach((w) => {
+                const btn = document.createElement("button");
+                btn.className = "btn m-1";
+                btn.textContent = w;
+                btn.onclick = () => {
+                    energy -= 20;
+                    stress += 20;
+                    showStatPopup("-20 Energy\n+20 Stress", "red");
+                    eventBox.classList.add("hidden");
+                    gameState = STATE.PLAYING;
+                };
+                eventChoices.appendChild(btn);
+            });
+        }
+
+        function triggerEvent() {
+            gameState = STATE.QUIZ;
+            const eventBox = document.getElementById("eventBox");
+            const eventText = document.getElementById("eventText");
+            const eventChoices = document.getElementById("eventChoices");
+            eventBox.classList.remove("hidden");
+            eventChoices.innerHTML = "";
+
+            const isGood = Math.random() < 0.5;
+            eventText.textContent = isGood
+                ? "Helpful tip! +10 Knowledge"
+                : "Oops! -10 Energy +10 Stress";
+
+            const btn = document.createElement("button");
+            btn.className = "btn m-1";
+            btn.textContent = "Continue";
+            btn.onclick = () => {
+                if (isGood) {
+                    knowledge += 10;
+                    showStatPopup("+10 Knowledge", "green");
+                } else {
+                    energy -= 10;
+                    stress += 10;
+                    showStatPopup("-10 Energy\n+10 Stress", "red");
+                }
+                eventBox.classList.add("hidden");
+                gameState = STATE.PLAYING;
+            };
+            eventChoices.appendChild(btn);
+        }
+
+        function showStatPopup(text, color) {
+            const popup = document.createElement("div");
+            popup.style.position = "fixed";
+            popup.style.top = "20%";
+            popup.style.left = "50%";
+            popup.style.transform = "translateX(-50%)";
+            popup.style.background = color;
+            popup.style.padding = "10px 20px";
+            popup.style.color = "white";
+            popup.style.borderRadius = "10px";
+            popup.style.fontWeight = "bold";
+            popup.style.zIndex = "10000";
+            popup.style.textAlign = "center";
+            popup.textContent = text;
+            document.body.appendChild(popup);
+            setTimeout(() => popup.remove(), 1200);
+        }
+
+        function showSlideMaze() {
+            let s = mazeStoryQueue[storyIndex];
+            document.getElementById("storyImage").src = s.img;
+            document.getElementById("storyText").textContent = s.text;
+            document.getElementById("dayTitle").textContent = "Day " + day + " Event";
+            document.getElementById("dayTitle").style.color = colors[day - 1];
+        }
+
+        document.getElementById("storyNext").onclick = () => {
+            if (mazeStoryQueue.length > 0) {
+                storyIndex++;
+                if (storyIndex >= mazeStoryQueue.length) {
+                    document.getElementById("storyScreen").classList.add("hidden");
+                    gameState = STATE.PLAYING;
+                    mazeStoryQueue = [];
+                } else showSlideMaze();
+            } else {
+                storyIndex++;
+                if (storyIndex >= currentStory.length) {
+                    document.getElementById("storyScreen").classList.add("hidden");
+                    generateMaze(day);
+                    gameState = STATE.PLAYING;
+                } else showSlide(day);
+            }
+        };
+
+        function checkFinish() {
+            if (player.x === finish.x && player.y === finish.y) {
+                if (day < 3) {
+                    day++;
+                    energy += 10;
+                    stress -= 10;
+                    if (energy > 100) energy = 100;
+                    if (stress < 0) stress = 0;
+                    storyTriggers.forEach((t) => {
+                        if (t.day === day) t.triggered = false;
+                    });
+                    startStory(day);
+                } else {
+                    if (knowledge >= 90) showGameOver("🎉 You PASSED the exam!");
+                    else showGameOver("💀 You failed the exam.");
+                }
+            }
+        }
+
+        function checkFail() {
+            if (energy <= 0 || stress >= 100)
+                showGameOver("💀 You burned out before finals...");
+        }
+
+        function showGameOver(msg) {
+            gameState = STATE.GAMEOVER;
+            document.getElementById("finalText").textContent = msg;
+            document.getElementById("gameOverScreen").classList.remove("hidden");
+        }
+
+        document.getElementById("restartBtn").onclick = () => {
+            day = 1;
+            energy = 40;
+            stress = 60;
+            knowledge = 0;
+            document.getElementById("gameOverScreen").classList.add("hidden");
+            startStory(1);
+            generateMaze(day);
+        };
+
+        document.addEventListener("keydown", (e) => {
+            if (gameState === STATE.PLAYING) {
+                if (e.key === "ArrowUp" || e.key === "w") move(0, -1);
+                if (e.key === "ArrowDown" || e.key === "s") move(0, 1);
+                if (e.key === "ArrowLeft" || e.key === "a") move(-1, 0);
+                if (e.key === "ArrowRight" || e.key === "d") move(1, 0);
+            }
+        });
+
+        document.getElementById("restartBtn").onclick = () => {
+            day = 1;
+            energy = 40;
+            stress = 60;
+            knowledge = 0;
+            document.getElementById("gameOverScreen").classList.add("hidden");
+            startStory(1);
+            generateMaze(day);
+        };
+
+        setupStoryTriggers();
+        startStory(1);
+        generateMaze(day);
+        draw();
+
+    </script>
+</head>
+
+<body>
+
+    <h1 class="text-center mt-5 my-3 container">School Escape: Maze & Mind </h1>
+    <div class="container text-center mt-3">
+
+        <h3 id="dayTitle" class="mt-3"></h3>
+
+        <div id="statsPanel">
+
+            <div class="stats">🧠 Knowledge</div>
+            <div class="progress mb-2 mx-3">
+                <div id="knowledgeBar" class="progress-bar bg-success"></div>
+            </div>
+            <div class="stats">⚡ Energy</div>
+            <div class="progress mb-2 mx-3">
+                <div id="energyBar" class="progress-bar bg-warning"></div>
+            </div>
+            <div class="stats">🤯 Stress</div>
+            <div class="progress mb-2 mx-3">
+                <div id="stressBar" class="progress-bar bg-danger"></div>
+            </div>
+        </div>
+
+        <div id="storyScreen" class="story hidden">
+            <div class="story-box">
+                <img id="storyImage" src="" class="story-img">
+                <p id="storyText"></p>
+                <button id="storyNext" class="btn btn-primary mt-3">Continue ▶</button>
+            </div>
+        </div>
+
+        <div id="instructions" class="card p-3 text-center dark">
+            <h3>🏫 Hallway Maze</h3>
+            <p>Reach dismissal by passing through the maze and surviving minigames before you get detention.</p>
+            <p>Move: WASD / Arrow Keys</p>
+            <p>Step on objects to trigger events. You don't always have to! They may contain easy or hard questions, and
+                good or bad rewards!</p>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="eventBox" class="card hidden">
+            <div class="card-body">
+                <h5 id="eventText"></h5>
+                <div id="eventChoices"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="gameOverScreen" class="overlay hidden">
+        <div class="overlay-card text-center">
+            <h1 id="finalText">GAME OVER</h1>
+            <button id="restartBtn" class="btn btn-lg btn-info mt-3">
+                Play Again🔄?
+            </button>
+        </div>
+    </div>
+
+    <body>
+
+        <div class="top-nav">
+            <div class="nav-left">School Escape: Maze & Mind</div>
+            <div class="nav-right">
+                <a href="index.html" id="homeLink">Home</a>
+                <a href="about.html" id="aboutLink">About</a>
+            </div>
+        </div>
+
+    </body>
+
+</html>

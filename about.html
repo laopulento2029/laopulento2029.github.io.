@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Escape: Maze & Mind</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-image: url("https://m.media-amazon.com/images/I/61L5DhcQQ5L.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', sans-serif;
+            position: relative;
+            z-index: 0;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: -1;
+        }
+
+        .top-nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 3;
+            font-family: 'Pixelify Sans', sans-serif;
+        }
+
+        .nav-left {
+            font-size: 22px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-right a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-right a:hover {
+            color: #00ffff;
+        }
+
+        .hero-section {
+            padding-top: 110px;
+            padding-bottom: 50px;
+        }
+
+        .locker-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+        .locker-img {
+            border-radius: 18px;
+            height: 350px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.4s ease;
+        }
+
+        .locker-wrapper:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .locker-info {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(6, 44, 78, 0.95),
+                    rgba(0, 0, 0, 0.92));
+            color: white;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .locker-wrapper:hover .locker-info {
+            opacity: 1;
+        }
+
+        .locker-wrapper:hover .locker-img {
+            transform: scale(1.08);
+        }
+
+        .locker-info img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+
+        .corkboard-container {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            min-height: 520px;
+            background-image: url("https://img.freepik.com/free-photo/back-school-concept-with-pinned-sticky-notes-school-supplies-board-background-flat-lay_176474-7032.jpg");
+            background-size: cover;
+            background-position: center;
+            border: 10px solid #7a4e2d;
+            border-radius: 12px;
+            padding: 50px 30px;
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.65);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .sticky-note {
+            background: #fff9c4;
+            padding: 20px;
+            width: 240px;
+            border-radius: 12px;
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.18),
+                0 3px 6px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+            transition: all 0.25s ease;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .sticky-note:nth-child(even) {
+            background: #ffe4e1;
+            transform: rotate(2deg);
+        }
+
+        .sticky-note:hover {
+            transform: rotate(0deg) scale(1.06);
+            box-shadow:
+                0 14px 25px rgba(0, 0, 0, 0.25),
+                0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .sticky-note::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: 4px;
+        }
+    </style>
+
+    <script>
+        document.querySelectorAll(".locker-wrapper").forEach(locker => {
+            locker.addEventListener("click", function () {
+                locker.classList.toggle("clicked");
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    </head>
+
+    <body>
+
+        <div class="top-nav">
+            <div class="nav-left">School Escape: Maze & Mind</div>
+            <div class="nav-right">
+                <a href="index.html" id="aboutLink">Home</a>
+            </div>
+        </div>
+
+        <div class="container text-center hero-section">
+            <h1 class="text-white fw-bold display-5">
+                Meet the Minds Behind the Escape
+            </h1>
+        </div>
+        <div class="row justify-content-center">
+
+
+            <div class="col-md-4 text-center mb-4">
+                <div class="locker-wrapper">
+
+                    <img src="https://i.pinimg.com/474x/85/9a/da/859adaff50170158ceb8e65fb20553ae.jpg"
+                        class="locker-img img-fluid">
+
+                    <div class="locker-info">
+                        <img src="https://static.wikitide.net/greatcharacterswiki/a/a2/Harry-Potter-PNG-Background.png">
+
+                        <h4 class="mt-2">Liam Casey Opulento</h4>
+                        <p>Game Developer</p>
+                        <p><small>Gave the players a fun time </small></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4 text-center mb-4">
+                <div class="locker-wrapper">
+
+                    <img src="https://i.pinimg.com/474x/85/9a/da/859adaff50170158ceb8e65fb20553ae.jpg"
+                        class="locker-img img-fluid">
+
+                    <div class="locker-info">
+                        <img
+                            src="https://numero.com/wp-content/uploads/2025/09/LEAD-IMAGE-Olivia_Dean_Jack_Davison-7-scaled.jpg">
+
+                        <h4 class="mt-2">Ayesha Nicole Manaloto</h4>
+                        <p>Homepage</p>
+                        <p><small>Welcomed the players with the homepage</small></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4 text-center mb-4">
+                <div class="locker-wrapper">
+
+                    <img src="https://i.pinimg.com/474x/85/9a/da/859adaff50170158ceb8e65fb20553ae.jpg"
+                        class="locker-img img-fluid">
+                    <div class="locker-info">
+                        <img src="https://media.philstar.com/photos/2025/02/15/viuce_2025-02-15_19-22-51.jpg">
+                        <h4 class="mt-2">Ainslee Gabriel Velasquez</h4>
+                        <p>About the Developer's Page</p>
+                        <p><small>Introduced the masterminds of this operation</small></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container my-5 text-center">
+            <h1 class="text-white fw-bold mb-4"> Game Mechanics Board</h1>
+
+            <div class="corkboard-container mx-auto">
+
+                <div class="sticky-note">
+                    <h5>Overview</h5>
+                    <p>
+                        Survive the school year by completing maze challenges and answering quizzes.
+                        Manage your stats wisely and reach Final Exam Day to win.
+                    </p>
+                </div>
+
+                <div class="sticky-note">
+                    <h5>How to Play</h5>
+                    <ul>
+                        <li>Use arrow keys to navigate the maze</li>
+                        <li>Reach the goal (G) to complete the level</li>
+                        <li>Answer quiz questions correctly</li>
+                        <li>Balance Energy, Knowledge, and Stress</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note">
+                    <h5> Win Condition</h5>
+                    <p>
+                        Reach Final Exam Day with sufficient Knowledge level.
+                    </p>
+                </div>
+
+                <div class="sticky-note">
+                    <h5>Lose Condition</h5>
+                    <p>
+                        Energy reaches 0 or Stress reaches 100.
+                    </p>
+                </div>
+
+                <div class="sticky-note">
+                    <h5> Cheat Sheet</h5>
+                    <p>
+                        Prioritize Energy. Reduce Stress early. Knowledge is key.
+                        <br><br>
+                        Review these subjects:
+                        <strong>Geography, Chem, Math, General Knowledge, Biology. </strong>
+                        No one said you couldn't use Google or Safari
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+</html>
