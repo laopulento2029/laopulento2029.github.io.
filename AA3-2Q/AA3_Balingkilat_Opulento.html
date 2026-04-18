@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+        <style>
+			html {
+				scroll-behavior: smooth;
+			}
+            body {
+                background-color: #094b2ecb;
+				font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
+			.sidepanel  {
+  				position: absolute;
+  				z-index: 1;
+  				width: 0;
+				height: 0.8in;
+  				top: 0;
+  				left: 0;
+  				background-image: url('https://i.pinimg.com/736x/04/d2/61/04d2611d332c15f23c52dd51b4c549d3.jpg');
+				background-position-y: 3in;
+  				overflow-x: hidden;
+  				transition: 0.5s;
+  				padding-top: 20px;
+				scrollbar-width: none;
+			}
+			.sidepanel a {
+  				padding: 8px 8px 8px 75px;
+  				text-decoration: none;
+  				font-size: 20px;
+  				color: #000000;
+  				display: inline;
+  				transition: 0.3s;
+			}
+			.sidepanel a:hover {
+  				color: #ffffff;
+			}
+			.sidepanel .closebtn {
+  				position: absolute;
+  				top: 0;
+  				right: 25px;
+  				font-size: 36px;
+			}
+			.openbtn {
+  				cursor: pointer;
+  				background-color: #00000000;
+  				padding: 10px 15px;
+  				border: none;
+				border-radius: 50%;
+				font-size:36px;
+			}
+			.openbtn:hover {
+  				background-color:#3d624845;
+			}
+            * {
+				box-sizing: border-box;
+			}
+		    .slides {
+				display: none;
+			}
+		    .slideshow-container {
+		      width: 100%;
+			  height: 80vh;
+		      position: relative;
+		      opacity: 0.6;
+		    }
+		    .text {
+		      color: #f2f2f2;
+		      font-size: 20px;
+		      padding: 8px 12px;
+		      position: absolute;
+		      bottom: 8px;
+		      width: 100%;
+		      text-align: center;
+		    }
+		    .numbertext {
+		      color: black;
+		      font-size: 12px;
+		      padding: 8px 12px;
+		      position: absolute;
+		      top: 0;
+			  margin-left: 20px;
+			  margin-top: 10px;
+		    }
+		    .dot {
+		      height: 15px;
+		      width: 15px;
+    		  margin: 0 2px;
+    		  background-color: #bbb;
+    		  border-radius: 50%;
+    		  display: inline-block;
+    		  transition: background-color 0.6s ease;
+    		}
+	    	.dot-bg {
+	    	  background-color: #717171;
+	    	}   
+	    	.fade {
+	    	  animation-name: fade;
+	    	  animation-duration: 1.5s;
+	    	}
+	    	@keyframes fade {
+	    	  from {opacity: .4} 
+	    	  to {opacity: 1}
+	    	}
+    		.textbox {
+       			z-index: 2;
+       			height: 3in;
+       			width: 5in;
+       			border-radius: 30%;
+       			background-color: #174a31;
+       			position: absolute;
+				top: 1.5in;
+				bottom: 1in;
+				left: 3.5in;
+				border: 3px black solid;
+    		}
+    		.infotext {
+       			z-index: 3;
+       			color: #f2f2f2;
+		        font-size: 16px;
+		        padding: 8px 8px;
+		        position: absolute;
+       			top: 0.5in;
+				left: 0.7in;
+				padding: 15px 15px;
+  				border: none;
+			}
+			.logo {
+				z-index: 4;
+				height: 4in;
+				width: 4in;
+				position: absolute;
+				top: 1in;
+				left: 0.3in;
+				border-radius: 50%;
+				border: 3px black solid;
+				background-image: url('https://i.pinimg.com/736x/a0/b5/32/a0b5327a813efd5d81bc613ff394b080.jpg');
+			}
+			.menubtn {
+				z-index: 3;
+				height: 0.7in;
+				width: 1.5in;
+				position: absolute;
+				top: 4.7in;
+				border: 2px black solid;
+				background-image: url('https://i.pinimg.com/1200x/5d/21/30/5d21301f0906f3a0272e874d23cabd4f.jpg');
+				background-size: cover;
+				margin-left: 5.4in;
+			}
+			.menucontainers {
+				width: 100%;
+				height: 10in;
+			}
+			.menutitle1 {
+				position: relative;
+				left: 3.5in;
+				background-color: peachpuff;
+				border-radius: 50%;
+				height: 2in;
+				width: 2in;
+				z-index: 1;
+			}
+			.menu1 {
+				position: relative;
+				left: 2in; 
+				bottom: 1in;
+				z-index: 2;
+				width: 5in;
+				height: 8in;
+				background-image: url('https://i.pinimg.com/736x/8f/d2/b7/8fd2b77474d407eb047a0e09a475650b.jpg');
+				background-size: cover;
+				border-radius: 10%;
+			}
+			.menutitle2 {
+				position: relative;
+				left: 10.5in;
+				bottom: 10in;
+				background-color: peachpuff;
+				border-radius: 50%;
+				height: 2in;
+				width: 2in;
+				z-index: 1;
+			}
+			.menu2 {
+				position: relative;
+				left: 9in;
+				bottom: 11in;
+				z-index: 2;
+				width: 5in;
+				height: 8in;
+				background-image: url('https://i.pinimg.com/736x/8f/d2/b7/8fd2b77474d407eb047a0e09a475650b.jpg');
+				background-size: cover;
+				border-radius: 10%;
+			}
+			table {
+				position: absolute;
+				top: 2.7in;
+				border-spacing: 20px;
+                text-align: center;
+                margin-left: auto; 
+                margin-right: auto;
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+                font-size: 30px;
+            }
+            tr {
+                height: 50px;
+            }
+            tr:hover {
+				background-color: #c6aa6b;
+				border-radius:40%;
+			}
+
+        </style>
+        <title>Lala Garden Cafe</title>
+    </head>
+    <body>
+		<button class="openbtn" onclick="openNav()"><strong>☰</strong></button>
+		<br>
+		<div id="sidepanelID" class="sidepanel">
+  			<a href="#" class="closebtn" onclick="closeNav()">×</a>
+  			<a href="#"><img src="https://cdn-icons-png.flaticon.com/128/25/25694.png" height="25" width="25" alt="Home icon">Home</a>
+  			<a href="#"><img src="https://cdn-icons-png.flaticon.com/128/25/25333.png" height="25" width="25" alt="Question icon">About Us</a>
+  			<a href="#"><img src="https://cdn-icons-png.flaticon.com/128/562/562678.png" height="25" width="25" alt="Food icon">Menu</a>
+  			<a href="#"><img src="https://cdn-icons-png.flaticon.com/128/3177/3177361.png" height="25" width="25" alt="Pin icon">Locations</a>
+			<a href="#"><img src="https://cdn-icons-png.flaticon.com/128/2354/2354127.png" height="25" width="25" alt="Contact icon">Contact Us</a>
+			<a href="#"><img src="https://cdn-icons-png.flaticon.com/128/9996/9996451.png" height="25" width="25" alt="Career icon">Career</a>
+			<a href="#"><img src="https://cdn-icons-png.flaticon.com/128/4903/4903482.png" height="25" width="25" alt="Basket icon">Order Now!</a>
+		</div>
+		<script>
+			function openNav() {
+			  document.getElementById("sidepanelID").style.width= "100%";
+			}
+
+			function closeNav() {
+			  document.getElementById("sidepanelID").style.width= "0";
+			}
+		</script>
+		<br>
+        <div class="slideshow-container">
+			<div class="slides fade">
+				<div class="numbertext">1 / 3</div>
+  			<img src="https://i.redd.it/itap-of-lala-garden-caf%C3%A9-v0-lxo33vhqwlva1.jpg?width=3936&format=pjpg&auto=webp&s=3fd279fdeb1bb419f51d6928cd98b002d424dec6" alt="Interior" style="height:80vh; width:100%; object-fit: cover; vertical-align: middle; border-radius: 5%;">
+				<div class="text">Interior</div>
+			</div>
+
+			<div class="slides fade">
+				<div class="numbertext">2 / 3</div>
+				<img src="https://live.staticflickr.com/65535/53344381285_d56fef6cdb_b.jpg" alt="Exterior" style="height:80vh; width:100%; object-fit: cover; vertical-align: middle; border-radius: 5%;">
+				<div class="text">Exterior</div>
+			</div>
+
+			<div class="slides fade">
+				<div class="numbertext">3 / 3</div>
+				<img src="https://i.ytimg.com/vi/EXuVpLnpL14/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCC8RP4HQQon-HejqKpSZ2P798y8w" alt="Food" style="height:80vh; width:100%; object-fit: cover; vertical-align: middle; border-radius: 5%;">
+				<div class="text">Food</div>
+			</div>
+
+			<div class="textbox">	
+				<p style="text-align: right; font-size: 36px; font-family: 'Brush Script MT'; color: rgb(255, 183, 124); margin-right: 30px;">Welcome to Lala Garden Café!</p>
+            	<p class="infotext" style="text-align: center;">A cozy and vibrant spot located in Angeles City. Known for its relaxing garden-inspired ambiance, the café is the perfect place to unwind with friends, study in peace, or simply enjoy delicious food and drinks. At Lala Garden, we believe in serving not just meals, but experiences—bringing together fresh ingredients, flavorful dishes, and a warm community vibe that makes every visit memorable.</p>
+			</div>
+			<div class="logo">
+				<img src="https://cdn-icons-png.flaticon.com/128/36/36470.png" alt="tree logo" height="200" style="position: relative; left: 1in; bottom: 50px;">
+				<h4 style="font-family: 'Garamond'; font-weight: bolder; text-align: center; font-size: 72px; margin-top: -0.7in; margin-bottom: -0.7in; color: #04321c; text-shadow: 2px 2px 5px #174a31, -2px -2px 5px #174a31;">LALA</h4>
+				<h4 style="font-family: 'Lucida Sans'; text-align: center; font-size: 48px; color: #04321c; text-shadow: 2px 2px 5px #174a31, -2px -2px 5px #174a31;">Garden</h4>
+				<h4 style="font-family: 'Brush Script MT'; text-align: center; font-size: 72px; margin-top: -0.8in; color: #04321c; text-shadow: 2px 2px 5px #174a31, -2px -2px 5px #174a31;">Cafe</h4>
+			</div>
+			<a href="#menus"><div class="menubtn"></div></a>
+		</div>
+		
+		<br>
+
+		<div style="text-align:center">
+		  <span class="dot"></span> 
+		  <span class="dot"></span> 
+		  <span class="dot"></span> 
+		</div>
+
+		<script>
+			let slideIndex = 0;
+			showSlides();
+
+			function showSlides() {
+			  let i;
+			  let slides = document.getElementsByClassName("slides");
+			  let dots = document.getElementsByClassName("dot");
+			  for (i = 0; i < slides.length; i++) {
+			    slides[i].style.display = "none";  
+			  }
+			  slideIndex++;
+			  if (slideIndex > slides.length) {slideIndex = 1}    
+			  for (i = 0; i < dots.length; i++) {
+			    dots[i].className = dots[i].className.replace(" dot-bg", "");
+			  }
+			  slides[slideIndex-1].style.display = "block";  
+			  dots[slideIndex-1].className += " dot-bg";
+			  setTimeout(showSlides, 3000);
+			}
+		</script>
+		<br>
+		<hr id="menus" style="width: 100%; height: 10px; background-color: rgb(83, 35, 3); box-shadow: 2px 2px 5px whitesmoke, -2px -2px 5px whitesmoke;">
+		<br>
+		<div class="menucontainers">
+			<div class="menutitle1">
+				<br>
+				<h1 style="text-align:center; font-family: 'Brush Script MT'; font-size: 50px; margin-top: -0.05in;">Food</h1>
+			</div>
+			<div class="menu1">
+				<img src="https://i.pinimg.com/1200x/02/c3/63/02c363b74f3f01d7e3cce3e70beab02d.jpg" alt="Rose Shrimp Pasta" height="150" style="z-index: 6; position: relative; left: -.7in; top: 2in; border-radius: 30%; transform: rotate(-20deg);">
+				<img src="https://i.pinimg.com/1200x/2b/db/fe/2bdbfebf9d09201aeb28b55fa30fcbb0.jpg" alt="Clubhouses" height="150" style="z-index: 6; position: relative; left: 3.7in; top: 3in; border-radius: 30%; transform: rotate(20deg);">
+				<img src="https://i.pinimg.com/1200x/0a/34/c1/0a34c17ac88f93878b0d3253ffd39e1f.jpg" alt="Margherita Pizza" height="150" style="z-index: 6; position: relative; left: -3in; top: 3.7in; border-radius: 30%; transform: rotate(-15deg);">
+				<img src="https://i.pinimg.com/736x/e8/4c/39/e84c39a70df9e3a2cdb85e5c16288dac.jpg" alt="Macarons" height="150" style="z-index: 6; position: relative; left: 1.3in; top: 4.7in; border-radius: 30%; transform: rotate(15deg);">
+				<img src="https://i.pinimg.com/1200x/fa/92/49/fa9249e488d695a52d10e60b07b4c36f.jpg" alt="Strawberry Mousse Cake" height="150" style="z-index: 6; position: relative; left: -1.2in; top: 4in; border-radius: 30%; transform: rotate(-15deg);">
+				<table>
+					<tr>
+						<th>Rose Shrimp Pasta</th>
+						<td>₱380</td>
+					</tr>
+					<tr>
+						<th>Clubhouses</th>
+						<td>₱320</td>
+					</tr>
+					<tr>
+						<th>Margherita Pizza</th>
+						<td>₱580</td>
+					</tr>
+					<tr>
+						<th>Macarons</th>
+						<td>₱100</td>
+					</tr>
+					<tr>
+						<th>Strawberry Mousse Cake</th>
+						<td>₱190</td>
+					</tr>
+				</table>
+			</div>
+			<div class="menutitle2">
+				<br>
+				<h1 style="text-align:center; font-family: 'Brush Script MT'; font-size: 50px; margin-top: -0.05in;">Drinks</h1>
+			</div>
+			<div class="menu2">
+				<img src="https://i.pinimg.com/1200x/88/96/7c/88967cdee36ee1a969b95c3f024712d1.jpg" alt="Strawberry & Cream Frappe" height="150" style="z-index: 6; position: relative; left: -0.9in; top: 2in; border-radius: 30%; transform: rotate(-20deg);">
+				<img src="https://i.pinimg.com/736x/08/59/6b/08596b2195dd38e2a0ea47ccf482a5a7.jpg" alt="Matcha Frappe" height="150" style="z-index: 6; position: relative; left: 3.7in; top: 3in; border-radius: 30%; transform: rotate(15deg);">
+				<img src="https://i.pinimg.com/736x/03/47/6e/03476e1a455fbad5eda2bc5679872a80.jpg" alt="Coffee Based Vanilla Latte" height="150" style="z-index: 6; position: relative; left: -3in; top: 4in; border-radius: 30%; transform: rotate(-20deg);">
+				<img src="https://i.pinimg.com/736x/17/af/d5/17afd51b49506f07767fd9332d321da7.jpg" alt="Blueberry Yogurt Smoothie" height="150" style="z-index: 6; position: relative; left: 1.7in; top: 5in; border-radius: 30%; transform: rotate(20deg);">
+				<img src="https://i.pinimg.com/736x/b7/eb/e2/b7ebe22a0befff43dea68cf7278c1f9e.jpg" alt="Blue Lemonade" height="150" style="z-index: 6; position: relative; left: -.5in; top: 4in; border-radius: 30%; transform: rotate(-20deg);">
+				<table>
+					<tr>
+						<th>Strawberry & Cream Frappe</th>
+						<td>₱250</td>
+					</tr>
+					<tr>
+						<th>Matcha Frappe</th>
+						<td>₱240</td>
+					</tr>
+					<tr>
+						<th>Coffee Based Vanilla Latte</th>
+						<td>₱180</td>
+					</tr>
+					<tr>
+						<th>Blueberry Yogurt Smoothie</th>
+						<td>₱230</td>
+					</tr>
+					<tr>
+						<th>Blue Lemonade</th>
+						<td>₱170</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<p>Liam Casey A. Opulento</p>
+		<p>9-Balingkilat</p>
+    </body>
+</html>	
