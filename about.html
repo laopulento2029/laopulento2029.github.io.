@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxiso</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://raw.githubusercontent.com/laopulento2029/laopulento2029.github.io./refs/heads/main/logo.png"
+        type="image/png" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+	<style>
+		:root {
+			--c1: #CCDCFD;
+			--c2: #BBBEFE;
+			--c3: #9EA3F5;
+			--c4: #E8BFFB;
+			--c5: #F2A5E8;
+			--c6: #A8B6FF;
+			--text: #1a1a1a;
+			--text-light: #666;
+			--shadow-sm: 0 4px 15px rgba(158, 163, 245, 0.15);
+			--shadow-md: 0 10px 30px rgba(158, 163, 245, 0.2);
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+			scroll-padding-top: 90px;
+		}
+
+		section,
+		#about-section,
+		#branches {
+			scroll-margin-top: 90px;
+		}
+
+		body {
+			margin: 0;
+			font-family: 'DM Sans', sans-serif;
+			color: var(--text);
+			overflow-x: hidden;
+			background: #fafbff;
+		}
+
+		.loading {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(135deg, var(--c1), var(--c4));
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 9999;
+			transition: opacity 0.5s ease;
+		}
+
+		.loading.hidden {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.loader {
+			width: 60px;
+			height: 60px;
+			border: 4px solid rgba(255, 255, 255, 0.2);
+			border-top: 4px solid var(--c3);
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		.navbar {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			z-index: 1000;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(20px);
+			padding: 10px 5%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 2px solid var(--c1);
+			transition: all 0.3s ease;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.navbar.scrolled {
+			background: rgba(255, 255, 255, 0.98);
+			box-shadow: var(--shadow-md);
+		}
+
+		.nav-left {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+
+		.logo {
+			height: 60px;
+			transition: transform 0.2s ease;
+		}
+
+		.logo:hover {
+			transform: scale(1.05);
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 10px;
+			font-size: 14px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			font-weight: 600;
+			align-items: center;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.nav-links li {
+			list-style: none;
+			padding: 8px 16px;
+			border-radius: 20px;
+			cursor: pointer;
+			font-weight: 600;
+			transition: all 0.2s ease;
+			background: var(--c1);
+		}
+
+		.nav-links li:hover,
+		.nav-links li.active {
+			background: var(--c3);
+			color: white;
+		}
+
+		.nav-links li a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.nav-right {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #ffffff;
+			min-width: 220px;
+			box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+			top: 100%;
+			left: 0;
+			padding: 15px;
+			list-style: none;
+			border-radius: 12px;
+			border: 1px solid #eee;
+			z-index: 1001;
+		}
+
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+
+		.dropdown-content li {
+			background-color: #dee2ff;
+			color: #4a4a4a;
+			margin: 5px;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 50px;
+			font-size: 13px;
+			font-weight: 600;
+			text-transform: uppercase;
+			transition: all 0.3s ease;
+			width: fit-content;
+			white-space: nowrap;
+		}
+
+		.dropdown-content li a:hover {
+			background-color: #f5f7ff;
+			color: #000;
+			transform: scale(1.05);
+		}
+
+		.dropdown-content::before {
+			display: none;
+		}
+
+		.search-container {
+			position: relative;
+			max-width: 180px;
+			flex: 0 0 auto;
+		}
+
+		.search-row {
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.search-feedback {
+			position: absolute;
+			right: 100%;
+			margin-right: 15px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 14px;
+			color: #e11d48;
+			white-space: nowrap;
+			display: none;
+		}
+
+		.input-wrapper {
+			position: relative;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			flex-shrink: 0;
+		}
+
+		.search-input {
+			width: 180px;
+			min-width: 180px;
+			flex-shrink: 0;
+			padding: 10px 42px 10px 15px;
+			border: 2px solid var(--c1);
+			border-radius: 25px;
+			font-size: 14px;
+			background: rgba(255, 255, 255, 0.9);
+			backdrop-filter: blur(10px);
+			transition: all 0.2s ease;
+			outline: none;
+		}
+
+		.search-btn {
+			position: absolute;
+			right: 12px;
+			background: transparent;
+			border: none;
+			outline: none;
+			padding: 0;
+			margin: 0;
+			box-shadow: none;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			cursor: pointer;
+		}
+
+		.search-btn i {
+			font-size: 15px;
+			color: var(--text-light);
+		}
+
+		.search-input:focus {
+			border-color: var(--c3);
+			box-shadow: var(--shadow-sm);
+		}
+
+		.search-icon {
+			position: absolute;
+			right: 14px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: var(--text-light);
+			font-size: 16px;
+			cursor: pointer;
+			transition: color 0.2s ease;
+		}
+
+		.search-icon:hover {
+			color: var(--c3);
+		}
+
+		.cart-icon {
+			padding: 12px;
+			border-radius: 50%;
+			background: var(--c1);
+			transition: all 0.2s ease;
+			text-decoration: none;
+			display: block;
+			margin-left: 2px;
+		}
+
+		.cart-icon:hover {
+			background: var(--c3);
+		}
+
+		.icon-group {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.icon-circle {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			background: var(--c1);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+			text-decoration: none;
+			flex-shrink: 0;
+			box-shadow: var(--shadow-sm);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.icon-circle::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: var(--c3);
+			transition: left 0.3s ease;
+			z-index: 0;
+		}
+
+		.icon-circle span,
+		.icon-circle i,
+		.icon-circle img {
+			position: relative;
+			z-index: 1;
+			transition: all 0.3s ease;
+		}
+
+		.icon-circle:hover::before {
+			left: 0;
+		}
+
+		.icon-circle:hover {
+			transform: scale(1.05);
+			box-shadow: var(--shadow-md);
+		}
+
+		.people-logo {
+			height: 22px;
+			width: 22px;
+		}
+
+		.cart-icon {
+			font-size: 18px;
+			color: white;
+		}
+
+		.back-to-store {
+			padding: 10px 20px;
+			background: var(--c3);
+			color: white;
+			text-decoration: none;
+			border-radius: 25px;
+			font-weight: 600;
+			font-size: 13px;
+			transition: all 0.3s ease;
+			box-shadow: var(--shadow-sm);
+			white-space: nowrap;
+		}
+
+		.back-to-store:hover {
+			background: var(--c5);
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-md);
+		}
+
+		#about-section {
+			padding: 60px 20px;
+			background: #fafbff;
+		}
+
+		.section-title {
+			text-align: center;
+			font-size: clamp(24px, 4vw, 32px);
+			margin-bottom: 40px;
+			font-weight: 700;
+			color: var(--c3);
+		}
+
+		.team-container,
+		.references-container {
+			max-width: 1000px;
+			margin: 0 auto 40px;
+		}
+
+		.team-container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 25px;
+		}
+
+		.references-container {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+
+		.team-member {
+			background: white;
+			padding: 25px 20px;
+			border-radius: 16px;
+			text-align: center;
+			box-shadow: var(--shadow-sm);
+			border: 1px solid var(--c1);
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: hidden;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.team-member::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: var(--c3);
+			transform: scaleX(0);
+			transition: transform 0.3s ease;
+		}
+
+		.team-member:hover {
+			transform: translateY(-6px);
+			box-shadow: var(--shadow-md);
+		}
+
+		.team-member:hover::before {
+			transform: scaleX(1);
+		}
+
+		.team-avatar {
+			width: 75px;
+			height: 75px;
+			background: white;
+			border: 3px solid var(--c1);
+			border-radius: 50%;
+			margin-bottom: 15px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.5rem;
+			color: var(--c3);
+			box-shadow: 0 4px 15px rgba(158, 163, 245, 0.2);
+			transition: all 0.3s ease;
+			flex-shrink: 0;
+		}
+
+		.team-member:hover .team-avatar {
+			border-color: var(--c3);
+			transform: scale(1.05);
+		}
+
+		.team-member h3 {
+			margin: 0 0 6px 0;
+			font-weight: 700;
+			font-size: 1.2rem;
+			color: var(--text);
+			flex-grow: 1;
+		}
+
+		.team-member span {
+			color: var(--text-light);
+			font-size: 0.95rem;
+			font-weight: 500;
+			flex-shrink: 0;
+		}
+
+		.references {
+			background: white;
+			padding: 30px;
+			border: 2px solid var(--c1);
+			border-radius: 16px;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.references h3 {
+			margin: 0 0 20px 0;
+			color: var(--c3);
+			font-weight: 700;
+			font-size: 1.3rem;
+			text-align: center;
+		}
+
+		.references ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.references li {
+			margin-bottom: 12px;
+			padding: 12px 16px;
+			background: var(--c1);
+			border-radius: 10px;
+			border-left: 4px solid var(--c3);
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+
+		.references li:last-child {
+			margin-bottom: 0;
+		}
+
+		.references li strong {
+			color: var(--c3);
+		}
+
+		#branches {
+			padding: 60px 20px;
+			background: #fff;
+		}
+
+		.branches-title {
+			text-align: center;
+			font-size: clamp(28px, 4vw, 36px);
+			margin-bottom: 40px;
+			font-weight: 700;
+			color: var(--c3);
+		}
+
+		.branches-grid {
+			max-width: 1200px;
+			margin: auto;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 30px;
+		}
+
+		.branch-card {
+			border: 1px solid var(--c1);
+			background: white;
+			border-radius: 20px;
+			overflow: hidden;
+			transition: all 0.3s ease;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.branch-card:hover {
+			transform: translateY(-8px);
+			box-shadow: var(--shadow-md);
+		}
+
+		.branch-card img {
+			width: 100%;
+			height: 260px;
+			object-fit: cover;
+		}
+
+		.branch-info {
+			padding: 20px;
+		}
+
+		.branch-info h3 {
+			margin: 0 0 8px 0;
+			font-weight: 700;
+			font-size: 1.2rem;
+			color: var(--c3);
+		}
+
+		.branch-info p {
+			margin: 0;
+			color: var(--text-light);
+			font-weight: 500;
+			font-size: 1rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="loading" id="loading">
+		<div class="loader"></div>
+	</div>
+
+	<nav class="navbar" id="navbar">
+		<div class="nav-left">
+			<img class="logo"
+				src="https://raw.githubusercontent.com/laopulento2029/laopulento2029.github.io./refs/heads/main/logo.png"
+				alt="Maxiso Logo">
+			<ul class="nav-links">
+				<li><a href="#home">Home</a></li>
+				<li><a href="about.html">About</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropbtn">Products <i class="fa fa-caret-down"></i></a>
+					<ul class="dropdown-content">
+						<a href="toys.html">
+							<li>Toys</li>
+						</a>
+						<a href="lifestyle.html">
+							<li>Lifestyle</li>
+						</a>
+						<a href="electronics.html">
+							<li>Electronics</li>
+						</a>
+						<a href="bw.html">
+							<li>Beauty & Wellness</li>
+						</a>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="nav-right">
+			<div class="search-container">
+
+				<div class="search-row">
+					<div id="searchFeedback" class="search-feedback"></div>
+
+					<form id="siteSearch" onsubmit="return handleSearch(event)">
+						<div class="input-wrapper">
+							<input id="searchInput" class="search-input" type="search" placeholder="Search products..."
+								aria-label="Search">
+
+							<button type="submit" class="search-btn">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+				<div id="searchSuggestions" class="search-suggestions"></div>
+			</div>
+			<a href="checkout.html" class="cart-icon">
+				<img src="https://cdn-icons-png.flaticon.com/128/3144/3144456.png" alt="Cart" style="width:20px;">
+			</a>
+		</div>
+	</nav>
+
+	<section id="about-section">
+		<h2 class="section-title mt-5">Meet the Team</h2>
+
+		<div class="team-container">
+			<div class="team-member">
+				<div class="team-avatar">
+					<i class="fas fa-code"></i>
+				</div>
+				<h3>Liam Opulento</h3>
+				<span>Logo & Products</span>
+			</div>
+			<div class="team-member">
+				<div class="team-avatar">
+					<i class="fas fa-file-alt"></i>
+				</div>
+				<h3>Emmanuel Simisim</h3>
+				<span>Logo & Cart</span>
+			</div>
+			<div class="team-member">
+				<div class="team-avatar">
+					<i class="fas fa-palette"></i>
+				</div>
+				<h3>Ayesha Manaloto</h3>
+				<span>Design, Homepage, & About</span>
+			</div>
+		</div>
+
+		<div class="references-container">
+			<div class="references">
+				<h3><i class="fas fa-info-circle"></i> Project Details</h3>
+				<ul>
+					<li><strong>UI Inspiration:</strong> Miniso official website design layout and product styling
+						concepts</li>
+					<li><strong>Images:</strong> Unsplash for high-quality product and lifestyle photos</li>
+					<li><strong>Icons:</strong> Font Awesome & Flaticon for UI icons</li>
+					<li><strong>Typography:</strong> Google Fonts – DM Sans</li>
+					<li><strong>Color Palette:</strong> Custom pastel palette inspired by modern retail branding</li>
+					<li><strong>Development Tools:</strong> HTML, CSS, JavaScript</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section id="branches">
+		<h2 class="branches-title">Our Branches</h2>
+		<div class="branches-grid">
+			<div class="branch-card">
+				<img src="https://www.miniso.com/vancheerfile/images/2025/8/20250807165110548.JPG" alt="SM City Clark">
+				<div class="branch-info">
+					<h3>SM City Clark</h3>
+					<p><i class="fas fa-map-marker-alt" style="color: var(--c3); margin-right: 8px;"></i>Angeles City,
+						Pampanga
+					</p>
+				</div>
+			</div>
+			<div class="branch-card">
+				<img src="https://www.miniso.com/vancheerfile/images/2024/11/20241112101735575.jpg"
+					alt="SM Urdaneta Central">
+				<div class="branch-info">
+					<h3>SM Urdaneta Central</h3>
+					<p><i class="fas fa-map-marker-alt" style="color: var(--c3); margin-right: 8px;"></i>Urdaneta City,
+						Pangasinan
+					</p>
+				</div>
+			</div>
+			<div class="branch-card">
+				<img src="https://www.miniso.com/vancheerfile/images/2024/11/20241112104812175.png"
+					alt="SM City Olongapo">
+				<div class="branch-info">
+					<h3>SM City Olongapo</h3>
+					<p><i class="fas fa-map-marker-alt" style="color: var(--c3); margin-right: 8px;"></i>Olongapo City,
+						Zambales
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+
+		document.addEventListener('DOMContentLoaded', function () {
+			setTimeout(() => {
+				document.getElementById('loading').classList.add('hidden');
+			}, 1500);
+
+			window.addEventListener('scroll', () => {
+				const navbar = document.getElementById('navbar');
+				if (window.scrollY > 50) {
+					navbar.classList.add('scrolled');
+				} else {
+					navbar.classList.remove('scrolled');
+				}
+			});
+
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute('href'));
+					if (target) {
+						target.scrollIntoView({
+							behavior: 'smooth',
+							block: 'start'
+						});
+					}
+				});
+			});
+
+			function setActiveNavLink() {
+				const navLinks = document.querySelectorAll('.nav-links li');
+				const sections = ['#about-section', '#branches'];
+
+				sections.forEach(section => {
+					const targetSection = document.querySelector(section);
+					if (targetSection) {
+						const rect = targetSection.getBoundingClientRect();
+						if (rect.top <= 90 && rect.bottom >= 90) {
+							navLinks.forEach(link => link.classList.remove('active'));
+							const activeLink = Array.from(navLinks).find(link =>
+								link.querySelector('a')?.getAttribute('href') === section
+							);
+							if (activeLink) {
+								activeLink.classList.add('active');
+							}
+						}
+					}
+				});
+			}
+
+			window.addEventListener('scroll', setActiveNavLink);
+			setActiveNavLink();
+		});
+
+		const pages = {
+			'home': 'index.html',
+			'products': 'products.html',
+			'about': 'about.html',
+			'collaborations': 'index.html#collaborations',
+			'arrivals': 'about.html#arrivals',
+			'branches': 'about.html#branches'
+		};
+		function similarity(s1, s2) {
+			s1 = s1.toLowerCase();
+			s2 = s2.toLowerCase();
+			let longer = s1.length > s2.length ? s1 : s2;
+			let shorter = s1.length > s2.length ? s2 : s1;
+			if (longer.length === 0) return 1.0;
+			let editDistance = levenshtein(longer, shorter);
+			return (longer.length - editDistance) / parseFloat(longer.length);
+		}
+
+		function levenshtein(a, b) {
+			const matrix = [];
+			for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+			for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+			for (let i = 1; i <= b.length; i++) {
+				for (let j = 1; j <= a.length; j++) {
+					if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+					else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+				}
+			}
+			return matrix[b.length][a.length];
+		}
+
+		function handleSearch(event) {
+			event.preventDefault();
+			const query = document.getElementById('searchInput').value.toLowerCase().trim();
+			const feedback = document.getElementById('searchFeedback');
+
+			feedback.style.display = 'none';
+
+			for (const key in pages) {
+				if (query.includes(key)) {
+					window.location.href = pages[key];
+					return false;
+				}
+			}
+
+			const suggestions = [];
+			for (const key in pages) {
+				if (similarity(query, key) > 0.4) suggestions.push(key);
+			}
+
+			feedback.style.display = 'block';
+
+			if (suggestions.length > 0) {
+				feedback.style.color = '#1a1a1a';
+				feedback.innerHTML = 'Did you mean: ' + suggestions.map(s =>
+					`<span style="background:var(--c4); padding:2px 8px; border-radius:10px; margin-left:4px; cursor:pointer;" onclick="document.getElementById('searchInput').value='${s}'; document.getElementById('siteSearch').dispatchEvent(new Event('submit'));">${s}</span>`
+				).join('');
+			} else {
+				feedback.style.color = '#e11d48';
+				feedback.textContent = 'No results.';
+			}
+
+			return false;
+		}
+	</script>
+
+</body>
+
+</html>
