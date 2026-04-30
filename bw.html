@@ -205,12 +205,6 @@
 			white-space: nowrap;
 		}
 
-		.dropdown-content li a:hover {
-			background-color: #f5f7ff;
-			color: #000;
-			transform: scale(1.05);
-		}
-
 		.dropdown-content::before {
 			display: none;
 		}
@@ -419,14 +413,14 @@
 			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 		}
 
-		h1.section-title {
+		h3.section-title {
 			font-family: "Titan One", sans-serif;
 			text-align: center;
 			color: #062c4e;
 			margin-top: 100px;
 		}
 
-		h1::after {
+		h3::after {
 			content: "";
 			display: block;
 			width: 120px;
@@ -517,18 +511,10 @@
 				<li class="dropdown">
 					<a href="#" class="dropbtn">Products <i class="fa fa-caret-down"></i></a>
 					<ul class="dropdown-content">
-						<a href="toys.html">
-							<li>Toys</li>
-						</a>
-						<a href="lifestyle.html">
-							<li>Lifestyle</li>
-						</a>
-						<a href="electronics.html">
-							<li>Electronics</li>
-						</a>
-						<a href="bw.html">
-							<li>Beauty & Wellness</li>
-						</a>
+						<li><a href="toys.html">Toys</a></li>
+						<li><a href="lifestyle.html">Lifestyle</a></li>
+						<li><a href="electronics.html">Electronics</a></li>
+						<li><a href="bw.html">Beauty & Wellness</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -560,7 +546,7 @@
 	</nav>
 
 	<div class="container">
-		<h1 class="section-title">Beauty & Wellness</h1>
+		<h3 class="section-title h1">Beauty & Wellness</h3>
 
 		<div class="container my-4">
 			<div class="row g-4">
@@ -584,10 +570,10 @@
 								the brand’s
 								heritage with a classic California adventure.</p>
 							<div class="quantity-selector">
-								<label for="quantity" class="mx-2">Quantity:</label>
+								<label for="quantity1" class="mx-2">Quantity:</label>
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-								<input type="number" name="quantity" value="1" min="1">
+								<input type="number" name="quantity" id="quantity1" value="1" min="1">
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
 							</div>
@@ -624,10 +610,10 @@
 								exfoliates, brightens
 								skin tone, refines pores. Wipe after washing face, skin becomes smooth, translucent</p>
 							<div class="quantity-selector">
-								<label for="quantity" class="mx-2">Quantity:</label>
+								<label for="quantity2" class="mx-2">Quantity:</label>
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-								<input type="number" name="quantity" value="1" min="1">
+								<input type="number" name="quantity" id="quantity2" value="1" min="1">
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
 							</div>
@@ -664,10 +650,10 @@
 								finish without
 								drying out the lips</p>
 							<div class="quantity-selector">
-								<label for="quantity" class="mx-2">Quantity:</label>
+								<label for="quantity3" class="mx-2">Quantity:</label>
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-								<input type="number" name="quantity" value="1" min="1">
+								<input type="number" name="quantity" id="quantity3" value="1" min="1">
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
 							</div>
@@ -702,10 +688,10 @@
 							<h5>₱290</h5>
 							<p>Drop the bath fizzy into your bathwater. Let it melt and enjoy the relaxing bubbles.</p>
 							<div class="quantity-selector">
-								<label for="quantity" class="mx-2">Quantity:</label>
+								<label for="quantity4" class="mx-2">Quantity:</label>
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-								<input type="number" name="quantity" value="1" min="1">
+								<input type="number" name="quantity" id="quantity4" value="1" min="1">
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
 							</div>
@@ -742,10 +728,10 @@
 								motifs and
 								colorful stickers.</p>
 							<div class="quantity-selector">
-								<label for="quantity" class="mx-2">Quantity:</label>
+								<label for="quantity5" class="mx-2">Quantity:</label>
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-								<input type="number" name="quantity" value="1" min="1">
+								<input type="number" name="quantity" id="quantity5" value="1" min="1">
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
 							</div>
@@ -780,10 +766,10 @@
 							<h5>₱900</h5>
 							<p>Elevate your Kawaii vibes with fresh AlcoSpray!</p>
 							<div class="quantity-selector">
-								<label for="quantity" class="mx-2">Quantity:</label>
+								<label for="quantity6" class="mx-2">Quantity:</label>
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-								<input type="number" name="quantity" value="1" min="1">
+								<input type="number" name="quantity" id="quantity6" value="1" min="1">
 								<button type="button" class="qty-btn"
 									onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
 							</div>
@@ -802,201 +788,202 @@
 				</div>
 			</div>
 		</div>
-		<script>
+	</div>
+	<script>
 
-			document.addEventListener('DOMContentLoaded', function () {
-				setTimeout(() => {
-					document.getElementById('loading').classList.add('hidden');
-				}, 1500);
+		document.addEventListener('DOMContentLoaded', function () {
+			setTimeout(() => {
+				document.getElementById('loading').classList.add('hidden');
+			}, 1500);
 
-				window.addEventListener('scroll', () => {
-					const navbar = document.getElementById('navbar');
-					if (window.scrollY > 50) {
-						navbar.classList.add('scrolled');
-					} else {
-						navbar.classList.remove('scrolled');
-					}
-				});
-
-				document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-					anchor.addEventListener('click', function (e) {
-						e.preventDefault();
-						const target = document.querySelector(this.getAttribute('href'));
-						if (target) {
-							target.scrollIntoView({
-								behavior: 'smooth',
-								block: 'start'
-							});
-						}
-					});
-				});
-
-				function setActiveNavLink() {
-					const navLinks = document.querySelectorAll('.nav-links li');
-					const sections = ['#about-section', '#branches'];
-
-					sections.forEach(section => {
-						const targetSection = document.querySelector(section);
-						if (targetSection) {
-							const rect = targetSection.getBoundingClientRect();
-							if (rect.top <= 90 && rect.bottom >= 90) {
-								navLinks.forEach(link => link.classList.remove('active'));
-								const activeLink = Array.from(navLinks).find(link =>
-									link.querySelector('a')?.getAttribute('href') === section
-								);
-								if (activeLink) {
-									activeLink.classList.add('active');
-								}
-							}
-						}
-					});
+			window.addEventListener('scroll', () => {
+				const navbar = document.getElementById('navbar');
+				if (window.scrollY > 50) {
+					navbar.classList.add('scrolled');
+				} else {
+					navbar.classList.remove('scrolled');
 				}
-
-				window.addEventListener('scroll', setActiveNavLink);
-				setActiveNavLink();
 			});
 
-			let cart = JSON.parse(localStorage.getItem("cart")) || [];
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute('href'));
+					if (target) {
+						target.scrollIntoView({
+							behavior: 'smooth',
+							block: 'start'
+						});
+					}
+				});
+			});
 
-			function addToCart(button, name, price) {
+			function setActiveNavLink() {
+				const navLinks = document.querySelectorAll('.nav-links li');
+				const sections = ['#about-section', '#branches'];
 
-
-				const card = button.closest(".landmark-info");
-				const qtyInput = card.querySelector('input[type="number"]');
-				const quantity = parseInt(qtyInput.value);
-
-				cart.push({ name, price, quantity });
-
-				localStorage.setItem("cart", JSON.stringify(cart));
-
-				updateCartCount();
-
-				alert(name + " x" + quantity + " added to cart!");
+				sections.forEach(section => {
+					const targetSection = document.querySelector(section);
+					if (targetSection) {
+						const rect = targetSection.getBoundingClientRect();
+						if (rect.top <= 90 && rect.bottom >= 90) {
+							navLinks.forEach(link => link.classList.remove('active'));
+							const activeLink = Array.from(navLinks).find(link =>
+								link.querySelector('a')?.getAttribute('href') === section
+							);
+							if (activeLink) {
+								activeLink.classList.add('active');
+							}
+						}
+					}
+				});
 			}
 
+			window.addEventListener('scroll', setActiveNavLink);
+			setActiveNavLink();
+		});
 
-			function updateCartCount() {
-				const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-				document.getElementById("cartCount").innerText = totalItems;
-			}
+		let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+		function addToCart(button, name, price) {
 
 
-			function goToCart() {
-				window.location.href = "cart.html";
-			}
+			const card = button.closest(".landmark-info");
+			const qtyInput = card.querySelector('input[type="number"]');
+			const quantity = parseInt(qtyInput.value);
 
+			cart.push({ name, price, quantity });
+
+			localStorage.setItem("cart", JSON.stringify(cart));
 
 			updateCartCount();
 
-			function buyNow(button, name, price) {
+			alert(name + " x" + quantity + " added to cart!");
+		}
 
-				const card = button.closest(".landmark-info");
-				const qty = card.querySelector('input[type="number"]').value;
 
-				let cart = JSON.parse(localStorage.getItem("cart")) || [];
+		function updateCartCount() {
+			const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+			document.getElementById("cartCount").innerText = totalItems;
+		}
 
-				cart.push({
-					name,
-					price,
-					quantity: parseInt(qty)
-				});
 
-				localStorage.setItem("cart", JSON.stringify(cart));
+		function goToCart() {
+			window.location.href = "cart.html";
+		}
 
-				window.location.href = "cart.html";
+
+		updateCartCount();
+
+		function buyNow(button, name, price) {
+
+			const card = button.closest(".landmark-info");
+			const qty = card.querySelector('input[type="number"]').value;
+
+			let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+			cart.push({
+				name,
+				price,
+				quantity: parseInt(qty)
+			});
+
+			localStorage.setItem("cart", JSON.stringify(cart));
+
+			window.location.href = "cart.html";
+		}
+
+		const pages = {
+			'home': 'index.html',
+			'about': 'about.html',
+			'collaborations': 'index.html#collaborations',
+			'cart': 'cart.html',
+			'toys': 'toys.html',
+			'capybara': 'toys.html',
+			'cinnamoroll': 'toys.html',
+			'penguin': 'toys.html',
+			'cat': 'toys.html',
+			'mofusand': 'toys.html',
+			'chiikawa': 'toys.html',
+			'keychain': 'toys.html',
+			'puzzle': 'toys.html',
+			'pencil': 'lifestyle.html',
+			'notebook': 'lifestyle.html',
+			'case': 'lifestyle.html',
+			'washi': 'lifestyle.html',
+			'backpack': 'lifestyle.html',
+			'mug': 'lifestyle.html',
+			'tape': 'lifestyle.html',
+			'keyboard': 'electronics.html',
+			'speaker': 'electronics.html',
+			'headphones': 'electronics.html',
+			'mouse': 'electronics.html',
+			'fan': 'electronics.html',
+			'powerbank': 'electronics.html',
+			'toner': 'bw.html',
+			'lipstick': 'bw.html',
+			'bathbomb': 'bw.html',
+			'makeup': 'bw.html',
+			'perfume': 'bw.html',
+			'bath': 'bw.html'
+		};
+		function similarity(s1, s2) {
+			s1 = s1.toLowerCase();
+			s2 = s2.toLowerCase();
+			let longer = s1.length > s2.length ? s1 : s2;
+			let shorter = s1.length > s2.length ? s2 : s1;
+			if (longer.length === 0) return 1.0;
+			let editDistance = levenshtein(longer, shorter);
+			return (longer.length - editDistance) / parseFloat(longer.length);
+		}
+
+		function levenshtein(a, b) {
+			const matrix = [];
+			for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+			for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+			for (let i = 1; i <= b.length; i++) {
+				for (let j = 1; j <= a.length; j++) {
+					if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+					else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+				}
+			}
+			return matrix[b.length][a.length];
+		}
+
+		function handleSearch(event) {
+			event.preventDefault();
+			const query = document.getElementById('searchInput').value.toLowerCase().trim();
+			const feedback = document.getElementById('searchFeedback');
+
+			feedback.style.display = 'none';
+
+			for (const key in pages) {
+				if (query.includes(key)) {
+					window.location.href = pages[key];
+					return false;
+				}
 			}
 
-			const pages = {
-				'home': 'index.html',
-				'about': 'about.html',
-				'collaborations': 'index.html#collaborations',
-				'cart': 'cart.html',
-				'toys': 'toys.html',
-				'capybara': 'toys.html',
-				'cinnamoroll': 'toys.html',
-				'penguin': 'toys.html',
-				'cat': 'toys.html',
-				'mofusand': 'toys.html',
-				'chiikawa': 'toys.html',
-				'keychain': 'toys.html',
-				'puzzle': 'toys.html',
-				'pencil': 'lifestyle.html',
-				'notebook': 'lifestyle.html',
-				'case': 'lifestyle.html',
-				'washi': 'lifestyle.html',
-				'backpack': 'lifestyle.html',
-				'mug': 'lifestyle.html',
-				'tape': 'lifestyle.html',
-				'keyboard': 'electronics.html',
-				'speaker': 'electronics.html',
-				'headphones': 'electronics.html',
-				'mouse': 'electronics.html',
-				'fan': 'electronics.html',
-				'powerbank': 'electronics.html',
-				'toner': 'bw.html',
-				'lipstick': 'bw.html',
-				'bathbomb': 'bw.html',
-				'makeup': 'bw.html',
-				'perfume': 'bw.html',
-				'bath': 'bw.html'
-			};
-			function similarity(s1, s2) {
-				s1 = s1.toLowerCase();
-				s2 = s2.toLowerCase();
-				let longer = s1.length > s2.length ? s1 : s2;
-				let shorter = s1.length > s2.length ? s2 : s1;
-				if (longer.length === 0) return 1.0;
-				let editDistance = levenshtein(longer, shorter);
-				return (longer.length - editDistance) / parseFloat(longer.length);
+			const suggestions = [];
+			for (const key in pages) {
+				if (similarity(query, key) > 0.4) suggestions.push(key);
 			}
 
-			function levenshtein(a, b) {
-				const matrix = [];
-				for (let i = 0; i <= b.length; i++) matrix[i] = [i];
-				for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
-				for (let i = 1; i <= b.length; i++) {
-					for (let j = 1; j <= a.length; j++) {
-						if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
-						else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
-					}
-				}
-				return matrix[b.length][a.length];
+			feedback.style.display = 'block';
+
+			if (suggestions.length > 0) {
+				feedback.style.color = '#1a1a1a';
+				feedback.innerHTML = 'Did you mean: ' + suggestions.map(s =>
+					`<span style="background:var(--c4); padding:2px 8px; border-radius:10px; margin-left:4px; cursor:pointer;" onclick="document.getElementById('searchInput').value='${s}'; document.getElementById('siteSearch').dispatchEvent(new Event('submit'));">${s}</span>`
+				).join('');
+			} else {
+				feedback.style.color = '#e11d48';
+				feedback.textContent = 'No results.';
 			}
 
-			function handleSearch(event) {
-				event.preventDefault();
-				const query = document.getElementById('searchInput').value.toLowerCase().trim();
-				const feedback = document.getElementById('searchFeedback');
-
-				feedback.style.display = 'none';
-
-				for (const key in pages) {
-					if (query.includes(key)) {
-						window.location.href = pages[key];
-						return false;
-					}
-				}
-
-				const suggestions = [];
-				for (const key in pages) {
-					if (similarity(query, key) > 0.4) suggestions.push(key);
-				}
-
-				feedback.style.display = 'block';
-
-				if (suggestions.length > 0) {
-					feedback.style.color = '#1a1a1a';
-					feedback.innerHTML = 'Did you mean: ' + suggestions.map(s =>
-						`<span style="background:var(--c4); padding:2px 8px; border-radius:10px; margin-left:4px; cursor:pointer;" onclick="document.getElementById('searchInput').value='${s}'; document.getElementById('siteSearch').dispatchEvent(new Event('submit'));">${s}</span>`
-					).join('');
-				} else {
-					feedback.style.color = '#e11d48';
-					feedback.textContent = 'No results.';
-				}
-
-				return false;
-			}
-		</script>
+			return false;
+		}
+	</script>
 
 </body>
 
