@@ -138,6 +138,9 @@
 			text-transform: uppercase;
 			font-weight: 600;
 			align-items: center;
+			margin: 0;
+			padding: 0;
+			list-style: none;
 		}
 
 		.nav-links li {
@@ -164,17 +167,91 @@
 		.nav-right {
 			display: flex;
 			align-items: center;
-			gap: 10px;
+			gap: 8px;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #ffffff;
+			min-width: 220px;
+			box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+			top: 100%;
+			left: 0;
+			padding: 15px;
+			list-style: none;
+			border-radius: 12px;
+			border: 1px solid #eee;
+			z-index: 1001;
+		}
+
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+
+		.dropdown-content li {
+			background-color: #dee2ff;
+			color: #4a4a4a;
+			margin: 5px;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 50px;
+			font-size: 13px;
+			font-weight: 600;
+			text-transform: uppercase;
+			transition: all 0.3s ease;
+			width: fit-content;
+			white-space: nowrap;
+		}
+
+		.dropdown-content li a:hover {
+			background-color: #f5f7ff;
+			color: #000;
+			transform: scale(1.05);
+		}
+
+		.dropdown-content::before {
+			display: none;
 		}
 
 		.search-container {
 			position: relative;
-			max-width: 250px;
+			max-width: 180px;
+			flex: 0 0 auto;
+		}
+
+		.search-row {
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.search-feedback {
+			position: absolute;
+			right: 100%;
+			margin-right: 15px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 14px;
+			color: #e11d48;
+			white-space: nowrap;
+			display: none;
+		}
+
+		.input-wrapper {
+			position: relative;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			flex-shrink: 0;
 		}
 
 		.search-input {
-			width: 100%;
-			padding: 10px 40px 10px 15px;
+			width: 180px;
+			min-width: 180px;
+			flex-shrink: 0;
+			padding: 10px 42px 10px 15px;
 			border: 2px solid var(--c1);
 			border-radius: 25px;
 			font-size: 14px;
@@ -184,6 +261,28 @@
 			outline: none;
 		}
 
+		.search-btn {
+			position: absolute;
+			right: 12px;
+			background: transparent;
+			border: none;
+			outline: none;
+			padding: 0;
+			margin: 0;
+			box-shadow: none;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			cursor: pointer;
+		}
+
+		.search-btn i {
+			font-size: 15px;
+			color: var(--text-light);
+		}
+
 		.search-input:focus {
 			border-color: var(--c3);
 			box-shadow: var(--shadow-sm);
@@ -191,7 +290,7 @@
 
 		.search-icon {
 			position: absolute;
-			right: 12px;
+			right: 14px;
 			top: 50%;
 			transform: translateY(-50%);
 			color: var(--text-light);
@@ -211,39 +310,41 @@
 			transition: all 0.2s ease;
 			text-decoration: none;
 			display: block;
+			margin-left: 2px;
 		}
 
 		.cart-icon:hover {
 			background: var(--c3);
 		}
 
-		.landmark-card {
+		.card {
 			position: relative;
 			overflow: hidden;
 			border-radius: 20px;
 			background: #fafafa;
-			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+			box-shadow: var(--shadow-sm);
+			border: 2px solid var(--c1);
 			cursor: pointer;
 			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 			perspective: 1000px;
 			transform-style: preserve-3d;
 		}
 
-		.landmark-card::before {
+		.card::before {
 			content: "";
 			position: absolute;
 			inset: 0;
-			background: #dde7ee;
+			background: #eedded;
 			opacity: 0;
 			transition: opacity 0.3s ease;
 			z-index: 1;
 		}
 
-		.landmark-card:hover::before {
+		.card:hover::before {
 			opacity: 1;
 		}
 
-		.landmark-card img {
+		.card img {
 			width: 100%;
 			height: 350px;
 			object-fit: cover;
@@ -252,10 +353,10 @@
 			z-index: 0;
 		}
 
-		.landmark-card:hover img {
+		.card:hover img {
 			filter: brightness(70%) saturate(1.2);
 			transform: scale(1.15) rotateZ(2deg);
-			box-shadow: 0 8px 0 #74c0e3 inset;
+			box-shadow: 0 8px 0 #ad74e3 inset;
 		}
 
 		.landmark-info {
@@ -264,7 +365,7 @@
 			width: 100%;
 			height: 0;
 			padding: 20px;
-			background: #062c4e;
+			background: #11003d;
 			color: #fafafa;
 			opacity: 0;
 			overflow: hidden;
@@ -275,7 +376,7 @@
 			z-index: 2;
 		}
 
-		.landmark-card:hover .landmark-info {
+		.card:hover .landmark-info {
 			height: 100%;
 			opacity: 1;
 		}
@@ -289,7 +390,7 @@
 			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 		}
 
-		.landmark-card:hover .landmark-info h4 {
+		.card:hover .landmark-info h4 {
 			transform: translateY(-5px);
 			color: #74c0e3;
 			text-shadow: 0 0 10px rgba(116, 192, 227, 0.5);
@@ -308,11 +409,11 @@
 			width: 100%;
 		}
 
-		.landmark-card:hover .landmark-info p {
+		.card:hover .landmark-info p {
 			transform: translateY(-3px);
 		}
 
-		.landmark-card:hover {
+		.card:hover {
 			transform: translateY(-10px) rotateY(3deg) rotateX(3deg);
 			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 		}
@@ -320,9 +421,8 @@
 		h1.section-title {
 			font-family: "Titan One", sans-serif;
 			text-align: center;
-			margin-top: 50px;
-			margin-bottom: 20px;
 			color: #062c4e;
+			margin-top: 100px;
 		}
 
 		h1::after {
@@ -412,26 +512,47 @@
 				alt="Maxiso Logo">
 			<ul class="nav-links">
 				<li><a href="#home">Home</a></li>
-				<li><a href="#products">Products</a></li>
-				<li><a href="#arrivals">Collaborations</a></li>
-				<li><a href="#about-section">Team</a></li>
-				<li><a href="#branches">Branches</a></li>
+				<li><a href="about.html">About</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropbtn">Products <i class="fa fa-caret-down"></i></a>
+					<ul class="dropdown-content">
+						<a href="toys.html">
+							<li>Toys</li>
+						</a>
+						<a href="lifestyle.html">
+							<li>Lifestyle</li>
+						</a>
+						<a href="electronics.html">
+							<li>Electronics</li>
+						</a>
+						<a href="bw.html">
+							<li>Beauty & Wellness</li>
+						</a>
+					</ul>
+				</li>
 			</ul>
 		</div>
 
 		<div class="nav-right">
 			<div class="search-container">
-				<form id="siteSearch" class="d-flex" onsubmit="return handleSearch(event)">
-					<input id="searchInput" class="form-control me-2" type="search" placeholder="Search..."
-						aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Search</button>
-				</form>
 
-				<div id="searchFeedback" class="mx-2 text-danger" style="display:none;"></div>
-				<div id="searchSuggestions" class="mx-1" style="display:none;"> </div>
-				<i class="fas fa-search search-icon" id="searchIcon"></i>
+				<div class="search-row">
+					<div id="searchFeedback" class="search-feedback"></div>
+
+					<form id="siteSearch" onsubmit="return handleSearch(event)">
+						<div class="input-wrapper">
+							<input id="searchInput" class="search-input" type="search" placeholder="Search products..."
+								aria-label="Search">
+
+							<button type="submit" class="search-btn">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+				<div id="searchSuggestions" class="search-suggestions"></div>
 			</div>
-			<a href="https://your-cart-link.com" class="cart-icon">
+			<a href="cart.html" class="cart-icon">
 				<img src="https://cdn-icons-png.flaticon.com/128/3144/3144456.png" alt="Cart" style="width:20px;">
 			</a>
 		</div>
@@ -444,7 +565,7 @@
 			<div class="row g-4">
 
 				<div class="col-12 col-sm-6 col-md-4">
-					<div class="landmark-card">
+					<div class="card">
 						<img src="https://www.rkgamingstore.com/cdn/shop/files/RKROYALKLUDGES98-JP96_JIS.png"
 							class="card-img-top" alt="keyboard">
 						<div class="rating">
@@ -484,7 +605,7 @@
 				</div>
 
 				<div class="col-12 col-sm-6 col-md-4">
-					<div class="landmark-card">
+					<div class="card">
 						<img src="https://jblstore.com.ph/cdn/shop/files/JBLPBOTGSEAS2_caa8545c-fca4-4210-ad4a-b467c8b2ab23_5000x.png"
 							class="card-img-top" alt="speaker">
 						<div class="rating">
@@ -523,7 +644,7 @@
 				</div>
 
 				<div class="col-12 col-sm-6 col-md-4">
-					<div class="landmark-card">
+					<div class="card">
 						<img src="https://ecommerce.datablitz.com.ph/cdn/shop/files/1000000020241_700x.jpg"
 							class="card-img-top" alt="headphones">
 						<div class="rating">
@@ -562,7 +683,7 @@
 				</div>
 
 				<div class="col-12 col-sm-6 col-md-4">
-					<div class="landmark-card">
+					<div class="card">
 						<img src="https://down-ph.img.susercontent.com/file/c0e65d53b225f0c9d99614bf7b6f8093@resize_w900_nl.webp"
 							class="card-img-top" alt="mouse">
 						<div class="rating">
@@ -601,7 +722,7 @@
 				</div>
 
 				<div class="col-12 col-sm-6 col-md-4">
-					<div class="landmark-card">
+					<div class="card">
 						<img src="https://jisulife.com/cdn/shop/files/life10-main_2.png" class="card-img-top" alt="fan">
 						<div class="rating">
 							<i class="bi bi-star-fill text-warning"></i>
@@ -639,7 +760,7 @@
 				</div>
 
 				<div class="col-12 col-sm-6 col-md-4">
-					<div class="landmark-card">
+					<div class="card">
 						<img src="https://bavin.ph/cdn/shop/files/1_2a58e96f-a9b9-4842-9919-9308b5e4e4e7.png"
 							class="card-img-top" alt="powerbank">
 						<div class="rating">
@@ -757,8 +878,8 @@
 			}
 
 
-			function goToCheckout() {
-				window.location.href = "checkout.html";
+			function goToCart() {
+				window.location.href = "cart.html";
 			}
 
 
@@ -779,7 +900,7 @@
 
 				localStorage.setItem("cart", JSON.stringify(cart));
 
-				window.location.href = "checkout.html";
+				window.location.href = "cart.html";
 			}
 
 			const pages = {

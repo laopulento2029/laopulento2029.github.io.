@@ -2,24 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maxiso</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Maxiso</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://raw.githubusercontent.com/laopulento2029/laopulento2029.github.io./refs/heads/main/logo.png"
-        type="image/png" rel="icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+	<link href="https://raw.githubusercontent.com/laopulento2029/laopulento2029.github.io./refs/heads/main/logo.png"
+		type="image/png" rel="icon">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 	<style>
 		body {
-			background: #f8f9fa;
+			margin: 0;
+			font-family: 'DM Sans', sans-serif;
+			color: var(--text);
+			background: #fafbff;
+			padding-top: 100px;
 		}
 
 		:root {
@@ -50,14 +54,6 @@
 		#branches,
 		#products {
 			scroll-margin-top: 90px;
-		}
-
-		body {
-			margin: 0;
-			font-family: 'DM Sans', sans-serif;
-			color: var(--text);
-			overflow-x: hidden;
-			background: #fafbff;
 		}
 
 		.loading {
@@ -142,6 +138,9 @@
 			text-transform: uppercase;
 			font-weight: 600;
 			align-items: center;
+			margin: 0;
+			padding: 0;
+			list-style: none;
 		}
 
 		.nav-links li {
@@ -168,17 +167,91 @@
 		.nav-right {
 			display: flex;
 			align-items: center;
-			gap: 10px;
+			gap: 8px;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #ffffff;
+			min-width: 220px;
+			box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+			top: 100%;
+			left: 0;
+			padding: 15px;
+			list-style: none;
+			border-radius: 12px;
+			border: 1px solid #eee;
+			z-index: 1001;
+		}
+
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+
+		.dropdown-content li {
+			background-color: #dee2ff;
+			color: #4a4a4a;
+			margin: 5px;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 50px;
+			font-size: 13px;
+			font-weight: 600;
+			text-transform: uppercase;
+			transition: all 0.3s ease;
+			width: fit-content;
+			white-space: nowrap;
+		}
+
+		.dropdown-content li a:hover {
+			background-color: #f5f7ff;
+			color: #000;
+			transform: scale(1.05);
+		}
+
+		.dropdown-content::before {
+			display: none;
 		}
 
 		.search-container {
 			position: relative;
-			max-width: 250px;
+			max-width: 180px;
+			flex: 0 0 auto;
+		}
+
+		.search-row {
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.search-feedback {
+			position: absolute;
+			right: 100%;
+			margin-right: 15px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 14px;
+			color: #e11d48;
+			white-space: nowrap;
+			display: none;
+		}
+
+		.input-wrapper {
+			position: relative;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			flex-shrink: 0;
 		}
 
 		.search-input {
-			width: 100%;
-			padding: 10px 40px 10px 15px;
+			width: 180px;
+			min-width: 180px;
+			flex-shrink: 0;
+			padding: 10px 42px 10px 15px;
 			border: 2px solid var(--c1);
 			border-radius: 25px;
 			font-size: 14px;
@@ -188,6 +261,28 @@
 			outline: none;
 		}
 
+		.search-btn {
+			position: absolute;
+			right: 12px;
+			background: transparent;
+			border: none;
+			outline: none;
+			padding: 0;
+			margin: 0;
+			box-shadow: none;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			cursor: pointer;
+		}
+
+		.search-btn i {
+			font-size: 15px;
+			color: var(--text-light);
+		}
+
 		.search-input:focus {
 			border-color: var(--c3);
 			box-shadow: var(--shadow-sm);
@@ -195,7 +290,7 @@
 
 		.search-icon {
 			position: absolute;
-			right: 12px;
+			right: 14px;
 			top: 50%;
 			transform: translateY(-50%);
 			color: var(--text-light);
@@ -215,6 +310,7 @@
 			transition: all 0.2s ease;
 			text-decoration: none;
 			display: block;
+			margin-left: 2px;
 		}
 
 		.cart-icon:hover {
@@ -243,26 +339,47 @@
 				alt="Maxiso Logo">
 			<ul class="nav-links">
 				<li><a href="#home">Home</a></li>
-				<li><a href="#products">Products</a></li>
-				<li><a href="#arrivals">Collaborations</a></li>
-				<li><a href="#about-section">Team</a></li>
-				<li><a href="#branches">Branches</a></li>
+				<li><a href="about.html">About</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropbtn">Products <i class="fa fa-caret-down"></i></a>
+					<ul class="dropdown-content">
+						<a href="toys.html">
+							<li>Toys</li>
+						</a>
+						<a href="lifestyle.html">
+							<li>Lifestyle</li>
+						</a>
+						<a href="electronics.html">
+							<li>Electronics</li>
+						</a>
+						<a href="bw.html">
+							<li>Beauty & Wellness</li>
+						</a>
+					</ul>
+				</li>
 			</ul>
 		</div>
 
 		<div class="nav-right">
 			<div class="search-container">
-				<form id="siteSearch" class="d-flex" onsubmit="return handleSearch(event)">
-					<input id="searchInput" class="form-control me-2" type="search" placeholder="Search..."
-						aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Search</button>
-				</form>
 
-				<div id="searchFeedback" class="mx-2 text-danger" style="display:none;"></div>
-				<div id="searchSuggestions" class="mx-1" style="display:none;"> </div>
-				<i class="fas fa-search search-icon" id="searchIcon"></i>
+				<div class="search-row">
+					<div id="searchFeedback" class="search-feedback"></div>
+
+					<form id="siteSearch" onsubmit="return handleSearch(event)">
+						<div class="input-wrapper">
+							<input id="searchInput" class="search-input" type="search" placeholder="Search products..."
+								aria-label="Search">
+
+							<button type="submit" class="search-btn">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+				<div id="searchSuggestions" class="search-suggestions"></div>
 			</div>
-			<a href="https://your-cart-link.com" class="cart-icon">
+			<a href="cart.html" class="cart-icon">
 				<img src="https://cdn-icons-png.flaticon.com/128/3144/3144456.png" alt="Cart" style="width:20px;">
 			</a>
 		</div>
@@ -270,90 +387,61 @@
 
 	<div class="container py-5">
 		<div class="row g-4">
-
-
 			<div class="col-md-7">
 				<div class="checkout-box">
-					<h4>Billing Details</h4>
+					<h4 class="mb-4"><i class="bi bi-credit-card-2-front me-2"></i>Billing Details</h4>
 
-					<form id="checkoutForm">
-						<input class="form-control mb-3" placeholder="Full Name" required>
-						<input class="form-control mb-3" placeholder="Email" required>
-						<input class="form-control mb-3" placeholder="Address" required>
+					<form id="checkoutForm" action="http://52.74.133.173/cs3/checkout.php" method="POST">
+						<div class="mb-3">
+							<label class="form-label">Full Name</label>
+							<input type="text" class="form-control" name="cust_name" required placeholder="Full Name">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Email Address</label>
+							<input type="email" class="form-control" name="cust_email" required
+								placeholder="Email Address">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Shipping Address</label>
+							<textarea class="form-control" name="cust_addr" rows="3" required
+								placeholder="Street, City, Province"></textarea>
+						</div>
 
-						<button class="btn btn-dark w-100 mt-3">Place Order</button>
+						<input type="hidden" name="cust_order" id="cust_order_input">
+
+						<button type="submit" class="btn btn-primary w-100 py-3 mt-3"
+							style="background-color: var(--c3); border: none;">
+							<b>Place Order</b>
+						</button>
 					</form>
 				</div>
 			</div>
 
-
 			<div class="col-md-5">
 				<div class="checkout-box">
-					<h4>Your Cart</h4>
-
+					<h4 class="mb-4"><i class="bi bi-cart3 me-2"></i>Your Cart</h4>
 					<div id="cartItems"></div>
-
 					<hr>
-
-					<h5>Total: <span id="total">$0</span></h5>
+					<div class="d-flex justify-content-between align-items-center">
+						<h5>Total:</h5>
+						<h5 id="total" style="color: var(--c3); font-weight: bold;">₱0</h5>
+					</div>
+					<div class="mt-3 text-center">
+						<a href="index.html#products" class="text-decoration-none text-muted small">
+							<i class="bi bi-arrow-left"></i> Continue Shopping
+						</a>
+					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
 	<script>
-
 		document.addEventListener('DOMContentLoaded', function () {
 			setTimeout(() => {
 				document.getElementById('loading').classList.add('hidden');
-			}, 1500);
-
-			window.addEventListener('scroll', () => {
-				const navbar = document.getElementById('navbar');
-				if (window.scrollY > 50) {
-					navbar.classList.add('scrolled');
-				} else {
-					navbar.classList.remove('scrolled');
-				}
-			});
-
-			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-				anchor.addEventListener('click', function (e) {
-					e.preventDefault();
-					const target = document.querySelector(this.getAttribute('href'));
-					if (target) {
-						target.scrollIntoView({
-							behavior: 'smooth',
-							block: 'start'
-						});
-					}
-				});
-			});
-
-			function setActiveNavLink() {
-				const navLinks = document.querySelectorAll('.nav-links li');
-				const sections = ['#about-section', '#branches'];
-
-				sections.forEach(section => {
-					const targetSection = document.querySelector(section);
-					if (targetSection) {
-						const rect = targetSection.getBoundingClientRect();
-						if (rect.top <= 90 && rect.bottom >= 90) {
-							navLinks.forEach(link => link.classList.remove('active'));
-							const activeLink = Array.from(navLinks).find(link =>
-								link.querySelector('a')?.getAttribute('href') === section
-							);
-							if (activeLink) {
-								activeLink.classList.add('active');
-							}
-						}
-					}
-				});
-			}
-
-			window.addEventListener('scroll', setActiveNavLink);
-			setActiveNavLink();
+			}, 800);
+			renderCart();
 		});
 
 		function getCart() {
@@ -363,39 +451,48 @@
 		function renderCart() {
 			const container = document.getElementById("cartItems");
 			const totalEl = document.getElementById("total");
+			const hiddenOrderInput = document.getElementById("cust_order_input");
 
 			let cart = getCart();
-
 			container.innerHTML = "";
-
 			let total = 0;
 
 			if (cart.length === 0) {
-				container.innerHTML = "<p>Your cart is empty.</p>";
+				container.innerHTML = "<div class='text-center py-4'><p class='text-muted'>Your cart is empty.</p></div>";
 				totalEl.innerText = "₱0";
+				hiddenOrderInput.value = "";
 				return;
 			}
 
 			cart.forEach((item, index) => {
-
-				const subtotal = item.price * item.quantity;
+				const qty = item.quantity || 1;
+				const subtotal = item.price * qty;
 				total += subtotal;
 
 				container.innerHTML += `
-      <div class="card mb-3 p-3">
-        <h5>${item.name}</h5>
-        <p>Price: ₱${item.price}</p>
-        <p>Quantity: ${item.quantity}</p>
-        <p><b>Subtotal: ₱${subtotal}</b></p>
-
-        <button class="btn btn-danger btn-sm" onclick="removeItem(${index})">
-          Remove
-        </button>
-      </div>
-    `;
+                    <div class="cart-item-card">
+                        <div class="d-flex justify-content-between">
+                            <strong>${item.name}</strong>
+                            <span>₱${subtotal.toLocaleString()}</span>
+                        </div>
+                        <small class="text-muted">₱${item.price} x ${qty}</small>
+                        <div class="mt-2">
+                            <button class="btn btn-link btn-sm text-danger p-0" onclick="removeItem(${index})">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
 			});
 
-			totalEl.innerText = "₱" + total;
+			totalEl.innerText = "₱" + total.toLocaleString();
+
+			const formattedOrder = cart.map(item => ({
+				prod_name: item.name,
+				prod_price: item.price
+			}));
+
+			hiddenOrderInput.value = JSON.stringify(formattedOrder);
 		}
 
 		function removeItem(index) {
@@ -404,8 +501,6 @@
 			localStorage.setItem("cart", JSON.stringify(cart));
 			renderCart();
 		}
-
-		renderCart();
 
 		const pages = {
 			'home': '#home',

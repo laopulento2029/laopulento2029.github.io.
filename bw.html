@@ -139,205 +139,6 @@
 			text-transform: uppercase;
 			font-weight: 600;
 			align-items: center;
-		}
-
-		.nav-links li {
-			list-style: none;
-			padding: 8px 16px;
-			border-radius: 20px;
-			cursor: pointer;
-			font-weight: 600;
-			transition: all 0.2s ease;
-			background: var(--c1);
-		}
-
-		.nav-links li:hover,
-		.nav-links li.active {
-			background: var(--c3);
-			color: white;
-		}
-
-		.nav-links li a {
-			text-decoration: none;
-			color: inherit;
-		}
-
-		.nav-right {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-
-		.search-container {
-			position: relative;
-			max-width: 250px;
-		}
-
-		.search-input {
-			width: 100%;
-			padding: 10px 40px 10px 15px;
-			border: 2px solid var(--c1);
-			border-radius: 25px;
-			font-size: 14px;
-			background: rgba(255, 255, 255, 0.9);
-			backdrop-filter: blur(10px);
-			transition: all 0.2s ease;
-			outline: none;
-		}
-
-		.search-input:focus {
-			border-color: var(--c3);
-			box-shadow: var(--shadow-sm);
-		}
-
-		.search-icon {
-			position: absolute;
-			right: 12px;
-			top: 50%;
-			transform: translateY(-50%);
-			color: var(--text-light);
-			font-size: 16px;
-			cursor: pointer;
-			transition: color 0.2s ease;
-		}
-
-		.search-icon:hover {
-			color: var(--c3);
-		}
-
-		.cart-icon {
-			padding: 12px;
-			border-radius: 50%;
-			background: var(--c1);
-			transition: all 0.2s ease;
-			text-decoration: none;
-			display: block;
-		}
-
-		.cart-icon:hover {
-			background: var(--c3);
-		}
-
-		:root {
-			--c1: #CCDCFD;
-			--c2: #BBBEFE;
-			--c3: #9EA3F5;
-			--c4: #E8BFFB;
-			--c5: #F2A5E8;
-			--c6: #A8B6FF;
-			--text: #1a1a1a;
-			--text-light: #666;
-			--shadow-sm: 0 4px 15px rgba(158, 163, 245, 0.15);
-			--shadow-md: 0 10px 30px rgba(158, 163, 245, 0.2);
-		}
-
-		* {
-			box-sizing: border-box;
-		}
-
-		html {
-			scroll-behavior: smooth;
-			scroll-padding-top: 90px;
-		}
-
-		section,
-		#arrivals,
-		#about-section,
-		#branches,
-		#products {
-			scroll-margin-top: 90px;
-		}
-
-		body {
-			margin: 0;
-			font-family: 'DM Sans', sans-serif;
-			color: var(--text);
-			overflow-x: hidden;
-			background: #fafbff;
-		}
-
-		.loading {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(135deg, var(--c1), var(--c4));
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			z-index: 9999;
-			transition: opacity 0.5s ease;
-		}
-
-		.loading.hidden {
-			opacity: 0;
-			pointer-events: none;
-		}
-
-		.loader {
-			width: 60px;
-			height: 60px;
-			border: 4px solid rgba(255, 255, 255, 0.2);
-			border-top: 4px solid var(--c3);
-			border-radius: 50%;
-			animation: spin 1s linear infinite;
-		}
-
-		@keyframes spin {
-			0% {
-				transform: rotate(0deg);
-			}
-
-			100% {
-				transform: rotate(360deg);
-			}
-		}
-
-		.navbar {
-			position: fixed;
-			top: 0;
-			width: 100%;
-			z-index: 1000;
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(20px);
-			padding: 10px 5%;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			border-bottom: 2px solid var(--c1);
-			transition: all 0.3s ease;
-			box-shadow: var(--shadow-sm);
-		}
-
-		.navbar.scrolled {
-			background: rgba(255, 255, 255, 0.98);
-			box-shadow: var(--shadow-md);
-		}
-
-		.nav-left {
-			display: flex;
-			align-items: center;
-			gap: 20px;
-		}
-
-		.logo {
-			height: 60px;
-			transition: transform 0.2s ease;
-		}
-
-		.logo:hover {
-			transform: scale(1.05);
-		}
-
-		.nav-links {
-			display: flex;
-			gap: 10px;
-			font-size: 14px;
-			letter-spacing: 1px;
-			text-transform: uppercase;
-			font-weight: 600;
-			align-items: center;
 			margin: 0;
 			padding: 0;
 			list-style: none;
@@ -522,7 +323,8 @@
 			overflow: hidden;
 			border-radius: 20px;
 			background: #fafafa;
-			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+			box-shadow: var(--shadow-sm);
+			border: 2px solid var(--c1);
 			cursor: pointer;
 			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 			perspective: 1000px;
@@ -533,7 +335,7 @@
 			content: "";
 			position: absolute;
 			inset: 0;
-			background: #dde7ee;
+			background: #eedded;
 			opacity: 0;
 			transition: opacity 0.3s ease;
 			z-index: 1;
@@ -555,7 +357,7 @@
 		.card:hover img {
 			filter: brightness(70%) saturate(1.2);
 			transform: scale(1.15) rotateZ(2deg);
-			box-shadow: 0 8px 0 #74c0e3 inset;
+			box-shadow: 0 8px 0 #ad74e3 inset;
 		}
 
 		.landmark-info {
@@ -564,7 +366,7 @@
 			width: 100%;
 			height: 0;
 			padding: 20px;
-			background: #062c4e;
+			background: #11003d;
 			color: #fafafa;
 			opacity: 0;
 			overflow: hidden;
@@ -620,9 +422,8 @@
 		h1.section-title {
 			font-family: "Titan One", sans-serif;
 			text-align: center;
-			margin-top: 50px;
-			margin-bottom: 20px;
 			color: #062c4e;
+			margin-top: 100px;
 		}
 
 		h1::after {
@@ -657,10 +458,8 @@
 			-moz-appearance: textfield;
 		}
 
-		.quantity-selector input::-webkit-outer-spin-button,
 		.quantity-selector input::-webkit-inner-spin-button {
 			-webkit-appearance: none;
-			margin: 0;
 		}
 
 		.qty-btn {
@@ -714,7 +513,6 @@
 				alt="Maxiso Logo">
 			<ul class="nav-links">
 				<li><a href="#home">Home</a></li>
-				<li><a href="#collaborations">Collaborations</a></li>
 				<li><a href="about.html">About</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropbtn">Products <i class="fa fa-caret-down"></i></a>
@@ -1083,8 +881,8 @@
 			}
 
 
-			function goToCheckout() {
-				window.location.href = "http://52.74.133.173/cs3/checkout.php";
+			function goToCart() {
+				window.location.href = "cart.html";
 			}
 
 
@@ -1105,7 +903,7 @@
 
 				localStorage.setItem("cart", JSON.stringify(cart));
 
-				window.location.href = "checkout.html";
+				window.location.href = "cart.html";
 			}
 
 			const pages = {

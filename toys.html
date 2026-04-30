@@ -2,19 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maxiso</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Maxiso</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://raw.githubusercontent.com/laopulento2029/laopulento2029.github.io./refs/heads/main/logo.png"
-        type="image/png" rel="icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+	<link href="https://raw.githubusercontent.com/laopulento2029/laopulento2029.github.io./refs/heads/main/logo.png"
+		type="image/png" rel="icon">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 	<style>
@@ -365,7 +365,7 @@
 			width: 100%;
 			height: 0;
 			padding: 20px;
-			background: #651d60;
+			background: #11003d;
 			color: #fafafa;
 			opacity: 0;
 			overflow: hidden;
@@ -580,7 +580,7 @@
 							<h4 class="mt-5">Cute Snotty Capybara Plush</h4>
 							<h5>₱285</h5>
 							<p>
-								The Capibala Sniffle doll is a safe, high-quality, and versatile plush toy featuring a
+								The Capybara Sniffle doll is a safe, high-quality, and versatile plush toy featuring a
 								unique, soft, and durable capybara design that makes it an ideal, collectible gift for
 								children.</p>
 							<div class="quantity-selector">
@@ -880,8 +880,8 @@
 			}
 
 
-			function goToCheckout() {
-				window.location.href = "checkout.html";
+			function goToCart() {
+				window.location.href = "cart.html";
 			}
 
 
@@ -902,73 +902,73 @@
 
 				localStorage.setItem("cart", JSON.stringify(cart));
 
-				window.location.href = "checkout.html";
+				window.location.href = "cart.html";
 			}
 
 			const pages = {
-			'home': 'index.html',
-			'products': 'products.html',
-			'about': 'about.html',
-			'collaborations': 'index.html#collaborations',
-			'arrivals': 'about.html#arrivals',
-			'branches': 'about.html#branches'
-		};
-		function similarity(s1, s2) {
-			s1 = s1.toLowerCase();
-			s2 = s2.toLowerCase();
-			let longer = s1.length > s2.length ? s1 : s2;
-			let shorter = s1.length > s2.length ? s2 : s1;
-			if (longer.length === 0) return 1.0;
-			let editDistance = levenshtein(longer, shorter);
-			return (longer.length - editDistance) / parseFloat(longer.length);
-		}
+				'home': 'index.html',
+				'products': 'products.html',
+				'about': 'about.html',
+				'collaborations': 'index.html#collaborations',
+				'arrivals': 'about.html#arrivals',
+				'branches': 'about.html#branches'
+			};
+			function similarity(s1, s2) {
+				s1 = s1.toLowerCase();
+				s2 = s2.toLowerCase();
+				let longer = s1.length > s2.length ? s1 : s2;
+				let shorter = s1.length > s2.length ? s2 : s1;
+				if (longer.length === 0) return 1.0;
+				let editDistance = levenshtein(longer, shorter);
+				return (longer.length - editDistance) / parseFloat(longer.length);
+			}
 
-		function levenshtein(a, b) {
-			const matrix = [];
-			for (let i = 0; i <= b.length; i++) matrix[i] = [i];
-			for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
-			for (let i = 1; i <= b.length; i++) {
-				for (let j = 1; j <= a.length; j++) {
-					if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
-					else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+			function levenshtein(a, b) {
+				const matrix = [];
+				for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+				for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+				for (let i = 1; i <= b.length; i++) {
+					for (let j = 1; j <= a.length; j++) {
+						if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+						else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+					}
 				}
+				return matrix[b.length][a.length];
 			}
-			return matrix[b.length][a.length];
-		}
 
-		function handleSearch(event) {
-			event.preventDefault();
-			const query = document.getElementById('searchInput').value.toLowerCase().trim();
-			const feedback = document.getElementById('searchFeedback');
+			function handleSearch(event) {
+				event.preventDefault();
+				const query = document.getElementById('searchInput').value.toLowerCase().trim();
+				const feedback = document.getElementById('searchFeedback');
 
-			feedback.style.display = 'none';
+				feedback.style.display = 'none';
 
-			for (const key in pages) {
-				if (query.includes(key)) {
-					window.location.href = pages[key];
-					return false;
+				for (const key in pages) {
+					if (query.includes(key)) {
+						window.location.href = pages[key];
+						return false;
+					}
 				}
+
+				const suggestions = [];
+				for (const key in pages) {
+					if (similarity(query, key) > 0.4) suggestions.push(key);
+				}
+
+				feedback.style.display = 'block';
+
+				if (suggestions.length > 0) {
+					feedback.style.color = '#1a1a1a';
+					feedback.innerHTML = 'Did you mean: ' + suggestions.map(s =>
+						`<span style="background:var(--c4); padding:2px 8px; border-radius:10px; margin-left:4px; cursor:pointer;" onclick="document.getElementById('searchInput').value='${s}'; document.getElementById('siteSearch').dispatchEvent(new Event('submit'));">${s}</span>`
+					).join('');
+				} else {
+					feedback.style.color = '#e11d48';
+					feedback.textContent = 'No results.';
+				}
+
+				return false;
 			}
-
-			const suggestions = [];
-			for (const key in pages) {
-				if (similarity(query, key) > 0.4) suggestions.push(key);
-			}
-
-			feedback.style.display = 'block';
-
-			if (suggestions.length > 0) {
-				feedback.style.color = '#1a1a1a';
-				feedback.innerHTML = 'Did you mean: ' + suggestions.map(s =>
-					`<span style="background:var(--c4); padding:2px 8px; border-radius:10px; margin-left:4px; cursor:pointer;" onclick="document.getElementById('searchInput').value='${s}'; document.getElementById('siteSearch').dispatchEvent(new Event('submit'));">${s}</span>`
-				).join('');
-			} else {
-				feedback.style.color = '#e11d48';
-				feedback.textContent = 'No results.';
-			}
-
-			return false;
-		}
 		</script>
 
 </body>
