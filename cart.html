@@ -321,7 +321,23 @@
 			background: white;
 			border-radius: 12px;
 			padding: 25px;
-			box-shadow: 0 10px 25px color(black)
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+		}
+
+		.cart-items-wrapper {
+			max-height: 300px;
+			overflow-y: auto;
+			padding-right: 5px;
+			scroll-behavior: smooth;
+		}
+
+		.cart-items-wrapper::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		.cart-items-wrapper::-webkit-scrollbar-thumb {
+			background: var(--c1);
+			border-radius: 10px;
 		}
 	</style>
 
@@ -420,12 +436,18 @@
 			<div class="col-md-5">
 				<div class="checkout-box">
 					<h4 class="mb-4"><i class="bi bi-cart3 me-2"></i>Your Cart</h4>
-					<div id="cartItems"></div>
+
+					<div class="cart-items-wrapper">
+						<div id="cartItems"></div>
+					</div>
+
 					<hr>
+
 					<div class="d-flex justify-content-between align-items-center">
 						<h5>Total:</h5>
 						<h5 id="total" style="color: var(--c3); font-weight: bold;">₱0</h5>
 					</div>
+
 					<div class="mt-3 text-center">
 						<a href="index.html#products" class="text-decoration-none text-muted small">
 							<i class="bi bi-arrow-left"></i> Continue Shopping
@@ -503,11 +525,38 @@
 		}
 
 		const pages = {
-			'home': '#home',
-			'products': '#products',
-			'collaborations': '#arrivals',
-			'team': '#about-section',
-			'branches': '#branches'
+			'home': 'index.html',
+			'about': 'about.html',
+			'collaborations': 'index.html#collaborations',
+			'cart': 'cart.html',
+			'toys': 'toys.html',
+			'capybara': 'toys.html',
+			'cinnamoroll': 'toys.html',
+			'penguin': 'toys.html',
+			'cat': 'toys.html',
+			'mofusand': 'toys.html',
+			'chiikawa': 'toys.html',
+			'keychain': 'toys.html',
+			'puzzle': 'toys.html',
+			'pencil': 'lifestyle.html',
+			'notebook': 'lifestyle.html',
+			'case': 'lifestyle.html',
+			'washi': 'lifestyle.html',
+			'backpack': 'lifestyle.html',
+			'mug': 'lifestyle.html',
+			'tape': 'lifestyle.html',
+			'keyboard': 'electronics.html',
+			'speaker': 'electronics.html',
+			'headphones': 'electronics.html',
+			'mouse': 'electronics.html',
+			'fan': 'electronics.html',
+			'powerbank': 'electronics.html',
+			'toner': 'bw.html',
+			'lipstick': 'bw.html',
+			'bathbomb': 'bw.html',
+			'makeup': 'bw.html',
+			'perfume': 'bw.html',
+			'bath': 'bw.html'
 		};
 		function similarity(s1, s2) {
 			s1 = s1.toLowerCase();
